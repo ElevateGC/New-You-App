@@ -1,4 +1,4 @@
-angular.module('wpIonic.controllers')
+angular.module('controllers')
 
 .controller('CategoriesCtrl', function( $scope, $http, DataLoader, $timeout, $ionicSlideBoxDelegate, $ionicLoading, $rootScope, $log, lodash ) {
 

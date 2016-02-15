@@ -1,4 +1,4 @@
-angular.module('wpIonic.controllers', [])
+angular.module('controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $sce, DataLoader, $rootScope, $log ) {
   
@@ -12,7 +12,7 @@ angular.module('wpIonic.controllers', [])
   $rootScope.activeCategory = "default";
 })
 
-.controller('PostCtrl', function($scope, $stateParams, DataLoader, $ionicLoading, $rootScope, $sce, CacheFactory, $log, Bookmark, $timeout ) {
+.controller('PostCtrl', function($scope, $stateParams, DataLoader, $ionicLoading, $rootScope, $sce, CacheFactory, $log, Bookmark, $timeout, $cordovaSocialSharing ) {
 
   if ( ! CacheFactory.get('postCache') ) {
     CacheFactory.createCache('postCache');
@@ -78,6 +78,18 @@ angular.module('wpIonic.controllers', [])
       Bookmark.set( id );
       $scope.bookmarked = true;
     }
+  }
+
+  $scope.shareItem = function(post) {
+    console.log(post);
+    $cordovaSocialSharing
+    .shareViaFacebook(post.title.rendered, post.better_featured_image.source_url, post.link)
+    .then(function(result) {
+      // Success!
+    }, function(err) {
+      // An error occurred. Show a message to the user
+    });
+
   }
 
   // Pull to refresh

@@ -25,9 +25,9 @@ function initPushwoosh() {
 
 
 angular.module('NewYou', ['ionic','ionic.service.core',
-  'wpIonic.controllers',
-  'wpIonic.services',
-  'wpIonic.filters',
+  'controllers',
+  'services',
+  'filters',
   'ngCordova',
   'angular-cache',
   'shared.directives',
