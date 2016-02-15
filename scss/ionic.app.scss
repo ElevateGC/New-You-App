@@ -15,9 +15,35 @@ $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
 
-// The path for our ionicons font files, relative to the built CSS in www/css
-$ionicons-font-path: "../lib/ionic/fonts" !default;
+@import "utils/functions";
+@import "utils/mixins";
+@import "utils/helpers";
 
-// Include all of Ionic
+@import "base/colors";
+@import "base/variables";
+@import "base/typography";
+
+//override ionic default variables
+$font-family-sans-serif: 'Bebas Neue';
+$bar-padding-portrait: 0px;
+$bar-padding-landscape: 0px;
+$dark: #000;
+$scroll-refresh-icon-color: #000;
+
+//ionic imports
+$ionicons-font-path: "../lib/ionic/fonts" !default;
 @import "www/lib/ionic/scss/ionic";
 
+//remaining custom imports
+@import "components/horizontal-scroller";
+@import "components/category-filter";
+@import "components/inputs";
+@import "components/item";
+@import "components/slider";
+@import "components/scroll-refresher";
+
+@import "layout/side-menu";
+@import "layout/header";
+@import "layout/ion-content";
+
+@import "pages/home";

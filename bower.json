@@ -1,8 +1,11 @@
 {
-  "name": "wpIonic",
+  "name": "NewYou",
   "private": "true",
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#1.0.0-rc.2",
     "ionic-service-core": "~0.1.10"
+  },
+  "dependencies": {
+    "angular-translate": "~2.8.1"
   }
 }

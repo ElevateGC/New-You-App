@@ -1,0 +1,59 @@
+.horizontal-scroll-component {
+
+	height: $horizontal-scroll-component-height;
+  width: $horizontal-scroll-component-width;
+
+	@each $color-name, $color in $palettes {
+	  &.#{$color-name} {
+	    background-color: palette($color-name, base);
+	  }
+	}
+
+	h1.horizontal-scroll-title {
+		@extend .remove-extras;
+		color: $horizontal-scroll-title-color;
+		text-align: center;
+		margin: 0;
+	}
+
+	.horizontal-scroll {
+		overflow-x: auto;
+  	overflow-y: hidden ;
+  	white-space: nowrap;
+  	height: $horizontal-scroll-height;
+
+  	.scroll-item {
+			display: inline-block;
+			position: relative;
+			height: $horizontal-scroll-item-height;
+			margin: $horizontal-scroll-item-margin;
+			margin-bottom: 0;
+			margin-top: 0;
+			width: $horizontal-scroll-item-width;
+			
+			&:first-child {
+				margin-left: 0;	
+			}
+
+  		.scroll-item-image {
+			  height: $horizontal-scroll-item-image-height;
+			  width: $horizontal-scroll-item-image-width;
+			  background-position: center center;
+			}
+
+			.scroll-item-title {
+				position: absolute;
+				bottom: 0;
+				width: $horizontal-scroll-item-title-width;
+				color: white;
+				font-size: $horizontal-scroll-item-title-font-size;
+				background-color: $horizontal-scroll-item-title-bg;
+				margin: 0;
+				padding: $horizontal-scroll-item-title-padding;
+				word-wrap: break-word;
+  			overflow: hidden;
+    		white-space: normal;
+			}
+  	}
+	}
+}

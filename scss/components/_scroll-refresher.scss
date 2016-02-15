@@ -1,0 +1,8 @@
+.scroll-refresher {
+	@each $color-name, $color in $palettes {
+	  &.#{$color-name} {
+	    background-color: palette($color-name, base);
+	    color: white;
+	  }
+	}
+}

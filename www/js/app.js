@@ -1,26 +1,106 @@
-// Ionic wpIonic App
+function initPushwoosh() {
+  var pushNotification = cordova.require("com.pushwoosh.plugins.pushwoosh.PushNotification");
+  if (device.platform == "Android") {
+    registerPushwooshAndroid();
+  }
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'wpIonic' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'wpIonic.controllers' is found in controllers.js, wpIoinc.services is in services.js
-angular.module('wpIonic', ['ionic','ionic.service.core', 'wpIonic.controllers', 'wpIonic.services', 'wpIonic.filters', 'ngCordova', 'angular-cache'])
+  if (device.platform == "iPhone" || device.platform == "iOS") {
+    registerPushwooshIOS();
+  }
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if (window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+  if (device.platform == "Win32NT") {
+    registerPushwooshWP();
+  }
+
+  pushNotification.getLaunchNotification(
+    function(notification) {
+      if (notification != null) {
+        alert(JSON.stringify(notification));
+      } else {
+        alert("No launch notification");
+      }
     }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-  });
+  );
+}
+
+
+angular.module('NewYou', ['ionic','ionic.service.core',
+  'wpIonic.controllers',
+  'wpIonic.services',
+  'wpIonic.filters',
+  'ngCordova',
+  'angular-cache',
+  'shared.directives',
+  'ngLodash',
+  'pascalprecht.translate'
+])
+.run(function($ionicPlatform, $translate, $log, $cordovaPush, $rootScope, $http, $ionicPlatform) {
+  var androidConfig, iosConfig, register;
+ 
+    androidConfig = {
+        "senderID": ""
+    };
+    iosConfig = {
+        "badge": true,
+        "sound": true,
+        "alert": true
+    };
+ 
+    register = function(os, token) {
+        var baseUrl;
+        baseUrl = 'http://newyou.elevatehost.xyz/pnfw';
+        if (!baseUrl) {
+            return $q.reject();
+        }
+        return $http({
+            method: 'POST',
+            url: baseUrl + '/register',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            transformRequest: function(obj) {
+                var p, str;
+                str = [];
+                for (p in obj) {
+                    str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));
+                }
+                return str.join('&');
+            },
+            data: {
+                os: os,
+                token: token
+            }
+        });
+    };
+    return $ionicPlatform.ready(function() {
+      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+      // for form inputs)
+      if (window.cordova && window.cordova.plugins.Keyboard) {
+        cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+      }
+      if (window.StatusBar) {
+        // org.apache.cordova.statusbar required
+        StatusBar.styleDefault();
+      }
+      if (typeof navigator.globalization !== 'undefined') {
+        $cordovaGlobalization.getPreferredLanguage().then(function (language) {
+          $translate.use((language.value).split('-')[0]).then(function (data) {
+            console.log('SUCCESS -> ' + data);
+          }, function (error) {
+            console.log('ERROR -> ' + error);
+          });
+        }, null);
+      }
+      
+      initPushwoosh();
+
+    }, false);
 })
 
-.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, CacheFactoryProvider) {
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, CacheFactoryProvider, $translateProvider) {
+
+  $ionicConfigProvider.backButton.text('').icon('ion-chevron-left');
+  $ionicConfigProvider.views.maxCache(0);
 
   angular.extend(CacheFactoryProvider.defaults, { 
     'storageMode': 'localStorage',
@@ -34,6 +114,21 @@ angular.module('wpIonic', ['ionic','ionic.service.core', 'wpIonic.controllers', 
   if( ionic.Platform.isAndroid() ) {
     $ionicConfigProvider.scrolling.jsScrolling(false);
   }
+
+  $translateProvider.translations('en', {
+    appTitle: 'Pinbook',
+    categoriesTitle: 'Categories',
+    placesTitle: 'Places',
+    reviewsTitle: 'Reviews',
+    profileTitle: 'Profile',
+    newPlaceTitle: 'New place',
+    mapTitle: 'Map',
+    nearmeText: 'Near me',
+    addNewPlaceText: 'Add a place',
+    profileText: 'Profile',
+    settingsText: 'Settings',
+    logoutText: 'Log Out',
+  });
 
   $stateProvider
 
@@ -55,7 +150,26 @@ angular.module('wpIonic', ['ionic','ionic.service.core', 'wpIonic.controllers', 
     }
   })
 
-  // this is the first sub view, notice menuContent under 'views', which is loaded through menu.html
+  .state('app.categories', {
+    url: "/categories",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/categories.html",
+        controller: 'CategoriesCtrl'
+      }
+    }
+  })
+
+  .state('app.category', {
+    url: "/categories/:categoryName",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/category.html",
+        controller: 'CategoryCtrl'
+      }
+    }
+  })
+
   .state('app.posts', {
     url: "/posts",
     views: {
@@ -114,5 +228,5 @@ angular.module('wpIonic', ['ionic','ionic.service.core', 'wpIonic.controllers', 
       }
     });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/intro');
+  $urlRouterProvider.otherwise('/app/categories');
 });

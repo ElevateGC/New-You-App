@@ -1,0 +1,47 @@
+@each $color-name, $color in $palettes {
+  
+  &.item-#{$color-name} {
+    border: none;
+    
+    a {
+      height: $item-height;
+      line-height: $item-height;
+      padding: 0 !important;
+      text-align: center !important;
+      font-size: 36px;
+    }
+
+    .item-content {
+      background-color: palette($color-name, base);
+      color: white;
+    }
+  }
+}
+
+.item-with-image {
+  border: none;
+  background-color: black;
+
+  .item-content {
+    padding: 0 !important;
+    background-color: inherit;
+  }
+  h1 {
+    position: absolute;
+    bottom: 0px;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    line-height: 32px;
+    padding: 20px;
+    margin: 0;
+    width: 100%;
+    word-wrap: break-word;
+    overflow: hidden;
+    white-space: normal;
+  }
+  .slide-image {
+    height: auto;
+    width: 100%;
+    margin: 0;
+  }
+}

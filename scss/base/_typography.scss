@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'Bebas Neue';
+  src: url('../fonts/BebasNeue.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/BebasNeue.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/BebasNeue.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/BebasNeue.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/BebasNeue.svg#971508b09718b6144e128af2335b709c') format('svg'); /* Legacy iOS */
+       
+  font-style:   normal;
+  font-weight:  400;
+}
+
+// @each $color-name, $color in $palettes {
+//   .#{$color-name} {
+//     background-color: palette($color-name, base);
+//   }
+// }

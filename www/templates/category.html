@@ -1,0 +1,24 @@
+<ion-view>
+  <ion-content ng-class="activeCategory">
+  <ion-refresher on-refresh="doRefresh()" ng-class="activeCategory" spinner="lines" pulling-icon="ion-ios-arrow-down"></ion-refresher>
+  <label class="item item-input">
+  <i class="icon ion-search placeholder-icon pull-right"></i>
+  <input type="search">
+</label>
+  <category-filter category="activeCategory"> </category-filter>
+	<ion-list>
+		<ion-item class="item-icon-right item-with-image" ng-repeat="post in posts | unique:'id'" href="#/app/posts/{{post.id}}" track>
+			<h1>{{post.title.rendered}}</h1>
+    	<img ng-src="{{post.better_featured_image.source_url}}" alt="" class="slide-image">
+		</ion-item>
+	</ion-list>
+
+	<ion-infinite-scroll
+	ng-if="moreDataExists()"
+    on-infinite="loadMore()"
+    distance="1%"
+    immediate-check="false">
+  </ion-infinite-scroll>
+
+  </ion-content>
+</ion-view>

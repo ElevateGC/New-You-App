@@ -1,0 +1,22 @@
+.nav-logo {
+  height: inherit;
+  width: 60px;
+  float: left;
+}
+
+@each $color-name, $color in $palettes {
+  &.#{$color-name} {
+    .nav-logo {
+      background-color: palette($color-name, base);
+    }
+  }
+}
+
+.left-buttons {
+  margin-right: 0;
+  margin-left: 20px;
+}
+.back-button {
+  margin-right: 0;
+  margin-left: 20px;
+}

@@ -1,0 +1,21 @@
+.slider {
+	overflow: inherit;
+	h1 {
+		position: absolute;
+		bottom: 10px;
+		background-color: rgba(0,0,0,0.5);
+		color: white;
+		line-height: 32px;
+		padding: 20px;
+		margin: 0;
+		width: 100%;
+		word-wrap: break-word;
+  	overflow: hidden;
+    white-space: normal;
+	}
+	.slide-image {
+		height: auto;
+		width: 100%;
+		margin: 0;
+	}
+}

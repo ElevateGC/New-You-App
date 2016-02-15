@@ -1,0 +1,44 @@
+$pink: #ED2B8B;
+$blue: #1DAFEC;
+$green: #ACCD73;
+$orange: #F69831;
+$purple: #7B3B93;
+$red: #F0373B;
+
+$palettes: (
+  beauty: (
+    base: $pink,
+    light: lighten($pink, 10%),
+    dark: darken($pink, 10%)
+  ),
+  health: (
+    base:  $blue,
+    light: lighten($blue, 10%),
+    dark: darken($blue, 10%)
+  ),
+  wellness: (
+    base: $green,
+    light: lighten($green, 10%),
+    dark: darken($green, 10%)
+  ),
+  fashion: (
+    base: $orange,
+    light: lighten($orange, 10%),
+    dark: darken($orange, 10%)
+  ),
+  celebrity: (
+    base: $purple,
+    light: lighten($purple, 10%),
+    dark: darken($purple, 10%)
+  ),
+  entertainment: (
+    base: $red,
+    light: lighten($red, 10%),
+    dark: darken($red, 10%)
+  ),
+  default: (
+    base: #000,
+    light: lighten(#000, 10%),
+    dark: darken(#000, 10%)
+  )
+);

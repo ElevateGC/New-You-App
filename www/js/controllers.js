@@ -3,10 +3,13 @@ angular.module('wpIonic.controllers', [])
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $sce, DataLoader, $rootScope, $log ) {
   
   // Enter your site url here. You must have the WP-API v2 installed on this site. Leave /wp-json/wp/v2/ at the end.
-  $rootScope.url = 'http://www.mysite.com/wp-json/wp/v2/';
+  $rootScope.url = 'http://newyou.elevatehost.xyz/wp-json/wp/v2/';
 
   // $rootScope.callback = '_jsonp=JSON_CALLBACK';
 
+  $rootScope.mainCategories = ["beauty", "health", "wellness", "fashion", "celebrity", "entertainment"];
+
+  $rootScope.activeCategory = "default";
 })
 
 .controller('PostCtrl', function($scope, $stateParams, DataLoader, $ionicLoading, $rootScope, $sce, CacheFactory, $log, Bookmark, $timeout ) {

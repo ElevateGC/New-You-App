@@ -1,0 +1,8 @@
+ion-content {
+	@each $color-name, $color in $palettes {
+	  &.#{$color-name} {
+	  	background-color: palette($color-name, base);
+	    border-top: 6px solid palette($color-name, base);
+	  }
+	}
+}

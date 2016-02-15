@@ -1,0 +1,8 @@
+@function palette($palette, $tone: 'base') {
+    @return map-get(map-get($palettes, $palette), $tone);
+}
+// Return an em value based on the $base-font-size or contextual size. Thanks @ijy https://gist.github.com/ijy/1441967
+@function em($target, $context: $base-font-size) {
+   @if $target == 0 { @return 0 }
+   @return $target / $context + 0em;
+}
