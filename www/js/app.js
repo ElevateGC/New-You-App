@@ -17,7 +17,7 @@ function initPushwoosh() {
       if (notification != null) {
         alert(JSON.stringify(notification));
       } else {
-        alert("No launch notification");
+        console.log("No launch notification");
       }
     }
   );

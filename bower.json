@@ -6,6 +6,7 @@
     "ionic-service-core": "~0.1.10"
   },
   "dependencies": {
-    "angular-translate": "~2.8.1"
+    "angular-translate": "~2.8.1",
+    "angular-sanitize": "^1.5.0"
   }
 }

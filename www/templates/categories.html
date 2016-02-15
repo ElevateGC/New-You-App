@@ -4,7 +4,7 @@
 <ion-slide-box ng-if="recentPosts" on-slide-changed="slideHasChanged($index)" auto-play="true" does-continue="true" show-pager="true">
   <ion-slide ng-repeat="post in recentPosts" class="slide">
     <div class="tag"></div>
-    <h1>{{post.title.rendered}}</h1>
+    <h1 ng-bind-html="post.title.rendered"></h1>
     <img ng-src="{{post.better_featured_image.source_url}}" alt="" class="slide-image">
   </ion-slide>
 </ion-slide-box>

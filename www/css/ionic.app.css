@@ -9035,6 +9035,10 @@ a.button {
         overflow: hidden;
         white-space: normal; }
 
+category-filter {
+  display: block;
+  position: relative; }
+
 .category-filter {
   padding: 16px; }
   .category-filter:before {
@@ -9325,3 +9329,74 @@ ion-content.entertainment {
 ion-content.default {
   background-color: #000;
   border-top: 6px solid #000; }
+
+.detail-view .featured-image {
+  height: 280px;
+  width: 100%; }
+
+.detail-view h1 {
+  font-size: 36px;
+  color: #262626;
+  line-height: 36px;
+  text-align: center;
+  margin-top: 10px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
+  position: relative; }
+  .detail-view h1.beauty:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 90%;
+    left: 5%;
+    height: 1px;
+    background-color: #ED2B8B; }
+  .detail-view h1.health:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 90%;
+    left: 5%;
+    height: 1px;
+    background-color: #1DAFEC; }
+  .detail-view h1.wellness:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 90%;
+    left: 5%;
+    height: 1px;
+    background-color: #ACCD73; }
+  .detail-view h1.fashion:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 90%;
+    left: 5%;
+    height: 1px;
+    background-color: #F69831; }
+  .detail-view h1.celebrity:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 90%;
+    left: 5%;
+    height: 1px;
+    background-color: #7B3B93; }
+  .detail-view h1.entertainment:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 90%;
+    left: 5%;
+    height: 1px;
+    background-color: #F0373B; }
+  .detail-view h1.default:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 90%;
+    left: 5%;
+    height: 1px;
+    background-color: #000; }

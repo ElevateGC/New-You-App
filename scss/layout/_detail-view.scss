@@ -1,0 +1,33 @@
+.detail-view {
+
+	.featured-image {
+		height: 280px;
+		width: 100%;
+	}
+
+	h1 {
+		font-size: 36px;
+		color: #262626;
+		line-height: 36px;
+		text-align: center;
+		margin-top: 10px;
+		padding-bottom: 15px;
+		padding-left: 15px;
+		padding-right: 15px;
+		position: relative;
+
+		@each $color-name, $color in $palettes {
+		  &.#{$color-name} {
+		    &:after {
+		    	content: '';
+		    	position: absolute;
+		    	bottom: 0;
+		    	width: 90%;
+		    	left: 5%;
+		    	height: 1px;
+		    	background-color: palette($color-name, base);
+		    }
+	  	}
+		}
+	}
+}

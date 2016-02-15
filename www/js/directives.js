@@ -3,8 +3,6 @@ angular.module('shared.directives', [])
 .directive('ngBackground', function(){
   return function(scope, element, attrs){
 
-  	console.log(attrs.size);
-
     attrs.$observe("ngBackground",function(n,o){
        if(!n) return;
        element.css({
