@@ -23,10 +23,6 @@ $dark:                            #444 !default;
   -ms-transition: all 0.25s linear;
   transition: all 0.25s linear; }
 
-img.size-full {
-  width: 100%;
-  height: auto; }
-
 @font-face {
   font-family: 'Bebas Neue';
   src: url("../fonts/BebasNeue.eot");
@@ -9434,6 +9430,9 @@ ion-content.default {
   width: -moz-calc((100%/6) - 10px);
   margin-right: 10px;
   height: auto; }
+  .detail-view img.size-full {
+    width: 100%;
+    height: auto; }
 
 .detail-view .bookmark {
   display: inline-block;

@@ -17,25 +17,6 @@ angular.module('shared.directives', [])
   };
 })
 
-.directive('getAuthor', ['$http', '$rootScope', '$log', function($http, $rootScope, $log) {
-return {
-    restrict: 'E',    
-    scope:{
-        id:"="
-    },
-    controller:function($scope, $element){
-
-      $http({method: 'GET', url: $rootScope.url + 'users/' + $scope.id + '?fields=name,link,date'}).then(function (result) {
-        $scope.author = result.data;
-        $element.innerHTML = result.data.name;
-        $log.debug($scope.author);                    
-      }, function (result) {
-        $log.debug('Error with grabbing author data');
-      });
-    }
-  }
-}])
-
 .directive('categoryFilter', ['$ionicScrollDelegate','$state','$rootScope', function ($ionicScrollDelegate,$state,$rootScope) {
   return {
     restrict: 'E',
@@ -44,7 +25,7 @@ return {
       filterPosts: '&',
       setActiveFilter: '&'
     },
-    templateUrl: '../templates/directives/category-filter.html',
+    templateUrl: 'templates/directives/category-filter.html',
     controller: function($scope, $element, $attrs){
 
       $scope.activeFilter = "show all";

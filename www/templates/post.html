@@ -1,13 +1,13 @@
 <ion-view>
-  <ion-content class="detail-view" ng-if="content">
-  	<div class="post">
+  <ion-content class="detail-view">
+  	<div class="post" ng-if="content">
   		<div>
   		  <div class="featured-image" ng-background="{{post.better_featured_image.source_url}}" size="cover"></div>
         <h1 ng-bind-html="post.title.rendered" ng-class="activeCategory"></h1>
         <p class="created-info">Posted {{post.date | amDateFormat:'MMMM Do YYYY h:mm A'}} | {{post.author.name}}</p>
   		</div>
-  		<div class="body padding" ng-bind-html="content | html_filters"></div>
-
+  		<div class="item item-body body"ng-bind-html="content | html_filters"></div>
+    
       <div class="share">
         <h1>Share</h1>
         <img src="img/facebook.svg" alt="share on Facebook" ng-click="shareViaFacebook(post)">
@@ -17,5 +17,15 @@
       </div>
 
     </div>
+
+    <!--div class="item item-divider">Comments</div>
+      <ion-list ng-if="comments">
+        <ion-item ng-repeat="comment in comments">
+          <div class="item-body">
+            <h3 ng-bind-html="comment.author_name"></h3>
+            <p ng-bind-html="comment.content.rendered"></p>
+          </div>
+        </ion-item>
+      </ion-list-->
   </ion-content>
 </ion-view>
