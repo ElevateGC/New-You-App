@@ -9418,3 +9418,32 @@ ion-content.default {
   font-size: 18px;
   color: #262626;
   line-height: 24px; }
+
+.detail-view .share {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  background-color: black;
+  padding-top: 20px;
+  padding-bottom: 40px; }
+  .detail-view .share h1 {
+    color: white; }
+
+.detail-view img {
+  width: -webkit-calc((100%/6) - 10px);
+  width: -moz-calc((100%/6) - 10px);
+  margin-right: 10px;
+  height: auto; }
+
+.detail-view .bookmark {
+  display: inline-block;
+  position: relative; }
+  .detail-view .bookmark i {
+    top: 50%;
+    margin-top: -19px;
+    font-size: 38px;
+    text-align: center;
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    color: white; }
