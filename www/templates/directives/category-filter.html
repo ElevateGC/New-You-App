@@ -1,6 +1,6 @@
 <div class="category-filter" ng-class="category">
 	<h1>{{category}}</h1>
 	<ul>
-		<li ng-if="filters" ng-repeat="filter in filters" ng-class="{ 'active': activeFilter == filter}" ng-click="setActiveFilter(filter)">{{filter}}</li>
+		<li ng-if="filters" ng-repeat="filter in filters" ng-class="{ 'active': activefilter == filter.id}" ng-click="setActiveFilter(filter.id)">{{filter.label}}</li>
 	</ul>
 </div>

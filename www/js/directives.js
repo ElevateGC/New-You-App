@@ -41,37 +41,190 @@ angular.module('shared.directives', [])
     restrict: 'E',
     scope: {
       category: '=',
-      filterPosts: '&',
-      setActiveFilter: '&'
+      activefilter: '='
     },
     templateUrl: 'templates/directives/category-filter.html',
     controller: function($scope, $element, $attrs){
 
-      $scope.activeFilter = "show all";
-
       switch ($scope.category) {
         case "health":
-          $scope.filters = ["show all", "mens", "sex", "tips", "tips from pros", "videos"];
+          $scope.filters = 
+          [ 
+            {
+              label: "show all",
+              id: 1033
+            }, 
+            {
+              label: "mens",
+              id: 1049
+            },
+            {
+              label: "sex",
+              id: 1048
+            },
+            {
+              label: "tips",
+              id: 1047
+            },
+            {
+              label: "tips from pros",
+              id: 1051
+            },
+            {
+              label: "videos",
+              id: 1050
+            }
+          ];
           break;
 
         case "wellness":
-          $scope.filters = ["show all", "fitness", "nutrition", "relationships", "tips from pros", "weight loss"];
+          $scope.filters = 
+          [ 
+            {
+              label: "show all",
+              id: 1034
+            }, 
+            {
+              label: "fitness",
+              id: 1052
+            },
+            {
+              label: "nutrition",
+              id: 1053
+            },
+            {
+              label: "relationships",
+              id: 1054
+            },
+            {
+              label: "tips from pros",
+              id: 1068
+            },
+            {
+              label: "weight loss",
+              id: 1055
+            },
+            {
+              label: "videos",
+              id: 1056
+            }
+          ]
           break;
 
         case "beauty":
-          $scope.filters = ["show all", "body", "face", "hair", "makeup", "nails", "skincare", "style", "tips from the pros", "videos"];
+          $scope.filters =[ 
+            {
+              label: "show all",
+              id: 1032
+            }, 
+            {
+              label: "body",
+              id: 1045
+            },
+            {
+              label: "face",
+              id: 1044
+            },
+            {
+              label: "hair",
+              id: 1040
+            },
+            {
+              label: "makeup",
+              id: 1041
+            },
+            {
+              label: "nails",
+              id: 1042
+            },
+            {
+              label: "skincare",
+              id: 1043
+            },
+            {
+              label: "style",
+              id: 1038
+            },
+            {
+              label: "tips from the pros",
+              id: 1039
+            },
+            {
+              label: "videos",
+              id: 1046
+            }
+          ]
           break;
 
         case "fashion":
-          $scope.filters = ["show all"];
+          $scope.filters = [
+            {
+              label: "show all",
+              id: 1269
+            }
+          ]
           break;
 
         case "celebrity":
-          $scope.filters = ["show all", "photos", "up close", "videos"];
+          $scope.filters =[ 
+            {
+              label: "show all",
+              id: 1035
+            }, 
+            {
+              label: "photos",
+              id: 1057
+            },
+            {
+              label: "up close",
+              id: 1058
+            },
+            {
+              label: "videos",
+              id: 1059
+            }
+          ]
           break;
 
         case "entertainment":
-          $scope.filters = ["show all", "celebrity", "interviews", "movie trailers", "movies", "music", "red carpet", "tv", "videos"];
+        $scope.filters =[ 
+            {
+              label: "show all",
+              id: 1037
+            }, 
+            {
+              label: "celebrity",
+              id: 1061
+            },
+            {
+              label: "interviews",
+              id: 1062
+            },
+            {
+              label: "movie trailers",
+              id: 1063
+            },
+            {
+              label: "movies",
+              id: 1060
+            },
+            {
+              label: "music",
+              id: 1065
+            },
+            {
+              label: "red carpet",
+              id: 1066
+            },
+            {
+              label: "tv",
+              id: 1064
+            },
+            {
+              label: "videos",
+              id: 1067
+            }
+          ]
           break;
 
         default:
@@ -83,8 +236,8 @@ angular.module('shared.directives', [])
       }
 
       $scope.setActiveFilter = function(filter) {
-        $scope.activeFilter = null;
-        $scope.activeFilter = filter;
+        $scope.activefilter = filter;
+        $ionicScrollDelegate.$getByHandle('category-scroll').resize();
       }
     },
     link: function(scope, elem, attrs){

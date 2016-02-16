@@ -1,6 +1,6 @@
 <ion-side-menus enable-menu-with-back-views="true">
   <ion-side-menu-content drag-content="false">
-    <ion-nav-bar class="bar-dark" ng-class="activeCategory">
+    <ion-nav-bar class="bar-dark" ng-class="activeCategory.label">
       <ion-nav-back-button>
       </ion-nav-back-button>
 
@@ -23,8 +23,8 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item ng-repeat="category in mainCategories" class="item item-icon-left"  ng-class="'item-' + category" nav-clear menu-close href="#/app/categories/{{category}}">
-          {{category}}
+        <ion-item ng-repeat="category in mainCategories" class="item item-icon-left"  ng-class="'item-' + category.label" nav-clear menu-close ui-sref="app.category({categoryName: category.label})">
+          {{category.label}}
         </ion-item>
       </ion-list>
     </ion-content>

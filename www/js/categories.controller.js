@@ -2,7 +2,36 @@ angular.module('controllers')
 
 .controller('CategoriesCtrl', function( $scope, $http, DataLoader, $timeout, $ionicSlideBoxDelegate, $ionicLoading, $rootScope, $log, lodash ) {
 
-  var mainCategories = ["beauty", "health", "wellness", "fashion", "celebrity", "entertainment"];
+  var mainCategories = [
+    {
+      label: "featured",
+      id: 1074
+    },
+    {
+      label: "beauty",
+      id: 1032
+    },
+    {
+      label: "health",
+      id: 1033
+    },
+    {
+      label: "wellness",
+      id: 1034
+    },
+    {
+      label: "fashion",
+      id: 1269
+    },
+    {
+      label: "celebrity",
+      id: 1035
+    },
+    {
+      label: "entertainment",
+      id: 1037
+    }
+  ];
 
   var recentPostsApi = $rootScope.url + 'posts';
 
@@ -49,7 +78,7 @@ angular.module('controllers')
 
     angular.forEach(mainCategories, function(data){
 
-      var recentPosts = $rootScope.url + 'posts?filter[category_name]=' + data + filterParams;
+      var recentPosts = $rootScope.url + 'posts?filter[category_id]=' + data.id + filterParams;
 
       var category = {};
       category.title = data;
@@ -94,7 +123,7 @@ angular.module('controllers')
 
     $log.log('loadMore ' + $scope.category_pages[category] );
 
-    var loadMoreCategoryPostsUrl = $rootScope.url + 'posts?filter[category_name]=' + category + filterParams;
+    var loadMoreCategoryPostsUrl = $rootScope.url + 'posts?filter[category_id]=' + category.id + filterParams;
 
     $timeout(function() {
 
@@ -138,100 +167,3 @@ angular.module('controllers')
       
   };
 })
-
-.controller('CategoryCtrl', function( $scope, $http, DataLoader, $timeout, $ionicSlideBoxDelegate, $ionicLoading, $rootScope, $log, lodash, $stateParams ) {
-
-  $scope.moreItems = false;
-  
-  $rootScope.activeCategory = $stateParams.categoryName;
-
-  var filterParams = '&fields=id,title,better_featured_image';
-
-  paged = 1;
-
-  var postsApi = $rootScope.url + 'posts?page='+ paged + '&filter[category_name]=' + $stateParams.categoryName + filterParams;
-
-  $ionicLoading.show({
-    noBackdrop: false,
-    templateUrl: 'templates/directives/loader.html'
-  });
-
-  $scope.loadPosts = function() {
-
-    // Get all of our posts
-    DataLoader.get( postsApi ).then(function(response) {
-
-      $scope.posts = response.data;
-
-      $scope.moreItems = true;
-
-      $log.log(postsApi, response.data);
-      $ionicLoading.hide();
-
-    }, function(response) {
-      $ionicLoading.hide();
-      $log.log(postsApi, response.data);
-    });
-
-  }
-
-  // Load posts on page load
-  $scope.loadPosts();
-
-  // Load more (infinite scroll)
-  $scope.loadMore = function() {
-
-    if( !$scope.moreItems ) {
-      return;
-    }
-
-    var nextPage = paged++;
-
-    $log.log('loadMore ' + nextPage );
-
-    var loadNextPage = $rootScope.url + 'posts?page='+ nextPage + '&filter[category_name]=' + $stateParams.categoryName + filterParams;
-
-    $timeout(function() {
-
-      DataLoader.get( loadNextPage ).then(function(response) {
-
-        angular.forEach( response.data, function( value, key ) {
-          $scope.posts.push(value);
-        });
-
-        if( response.data.length <= 0 ) {
-          $scope.moreItems = false;
-        }
-      }, function(response) {
-        $scope.moreItems = false;
-        $log.error(response);
-      });
-
-      $scope.$broadcast('scroll.infiniteScrollComplete');
-      $scope.$broadcast('scroll.resize');
-
-    }, 1000);
-
-  }
-
-  $scope.moreDataExists = function() {
-    return $scope.moreItems;
-  }
-
-  // Pull to refresh
-  $scope.doRefresh = function() {
-  
-    $timeout( function() {
-
-      $scope.loadPosts();
-
-      //Stop the ion-refresher from spinning
-      $scope.$broadcast('scroll.refreshComplete');
-    
-    }, 1000);
-      
-  };
-    
-
-})
-

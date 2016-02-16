@@ -7,9 +7,40 @@ angular.module('controllers', [])
 
   // $rootScope.callback = '_jsonp=JSON_CALLBACK';
 
-  $rootScope.mainCategories = ["beauty", "health", "wellness", "fashion", "celebrity", "entertainment"];
+  // $rootScope.mainCategories = ["beauty", "health", "wellness", "fashion", "celebrity", "entertainment"];
 
-  $rootScope.activeCategory = "default";
+  $rootScope.mainCategories = [
+    {
+      label: "featured",
+      id: 1074
+    },
+    {
+      label: "beauty",
+      id: 1032
+    },
+    {
+      label: "health",
+      id: 1033
+    },
+    {
+      label: "wellness",
+      id: 1034
+    },
+    {
+      label: "fashion",
+      id: 1269
+    },
+    {
+      label: "celebrity",
+      id: 1035
+    },
+    {
+      label: "entertainment",
+      id: 1037
+    }
+  ];
+
+  $rootScope.activeCategory = $rootScope.mainCategories[0];
 })
 
 

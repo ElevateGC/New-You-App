@@ -15,6 +15,7 @@
   <preference name="BackupWebStorage" value="none"/>
   <preference name="SplashScreen" value="screen"/>
   <preference name="SplashScreenDelay" value="3000"/>
+  <preference name="AllowInlineMediaPlayback" value="true"/>
   <feature name="SocialSharing">
     <param name="ios-package" value="SocialSharing"/>
   </feature>
