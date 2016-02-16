@@ -19,6 +19,11 @@ angular.module('controllers', [])
 
   $scope.moreItems = false;
 
+  $ionicLoading.show({
+    noBackdrop: false,
+    templateUrl: 'templates/directives/loader.html'
+  });
+
   $scope.loadPosts = function() {
 
     // Get all of our posts
@@ -29,9 +34,11 @@ angular.module('controllers', [])
       $scope.moreItems = true;
 
       $log.log(postsApi, response.data);
+      $ionicLoading.hide();
 
     }, function(response) {
       $log.log(postsApi, response.data);
+      $ionicLoading.hide();
     });
 
   }

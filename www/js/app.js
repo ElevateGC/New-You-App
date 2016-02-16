@@ -24,7 +24,9 @@ function initPushwoosh() {
 }
 
 
-angular.module('NewYou', ['ionic','ionic.service.core',
+angular.module('NewYou', [
+  'ionic',
+  'ionic.service.core',
   'controllers',
   'services',
   'filters',

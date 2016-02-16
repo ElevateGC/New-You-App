@@ -8,7 +8,7 @@
   <category-filter category="activeCategory"> </category-filter>
 	<ion-list>
 		<ion-item class="item-icon-right item-with-image" ng-repeat="post in posts | unique:'id'" href="#/app/posts/{{post.id}}" track>
-			<h1>{{post.title.rendered}}</h1>
+			<h1 ng-bind-html="post.title.rendered"></h1>
     	<img ng-src="{{post.better_featured_image.source_url}}" alt="" class="slide-image">
 		</ion-item>
 	</ion-list>

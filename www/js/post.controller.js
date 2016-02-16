@@ -18,7 +18,8 @@ angular.module('controllers')
     // Fetch remote post
 
     $ionicLoading.show({
-      noBackdrop: true
+      noBackdrop: false,
+      templateUrl: 'templates/directives/loader.html'
     });
 
     DataLoader.get( singlePostApi ).then(function(response) {

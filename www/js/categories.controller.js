@@ -8,31 +8,40 @@ angular.module('controllers')
 
   var category_id_count = 0;
 
+  var filterParams = '&fields=id,title,better_featured_image';
+
   $scope.moreRecentPosts = false;
   $scope.moreCategories = false;
 
   $scope.loadRecentPosts = function() {
 
+    $ionicLoading.show({
+      noBackdrop: false,
+      templateUrl: 'templates/directives/loader.html'
+    });
+
     // Get all of our posts
-    DataLoader.get( recentPostsApi ).then(function(response) {
+    DataLoader.get( recentPostsApi + '?fields=id,title,better_featured_image' ).then(function(response) {
 
       $scope.recentPosts = response.data;
 
       $scope.moreRecentPosts = true;
 
       $log.log(recentPostsApi, response.data);
-
+      $ionicLoading.hide();
     }, function(response) {
-      $log.log(recentPostsApi, response.data);
+      $log.error('error', response);
+      $ionicLoading.hide();
     });
 
   };
 
   $scope.loadCategories = function() {
 
-    // $ionicLoading.show({
-    //   noBackdrop: true,
-    // });
+    $ionicLoading.show({
+      noBackdrop: false,
+      templateUrl: 'templates/directives/loader.html'
+    });
 
     $scope.categories = [];
 
@@ -40,7 +49,7 @@ angular.module('controllers')
 
     angular.forEach(mainCategories, function(data){
 
-      var recentPosts = $rootScope.url + 'posts?filter[category_name]=' + data;
+      var recentPosts = $rootScope.url + 'posts?filter[category_name]=' + data + filterParams;
 
       var category = {};
       category.title = data;
@@ -85,7 +94,7 @@ angular.module('controllers')
 
     $log.log('loadMore ' + $scope.category_pages[category] );
 
-    var loadMoreCategoryPostsUrl = $rootScope.url + 'posts?filter[category_name]=' + category;
+    var loadMoreCategoryPostsUrl = $rootScope.url + 'posts?filter[category_name]=' + category + filterParams;
 
     $timeout(function() {
 
@@ -136,9 +145,16 @@ angular.module('controllers')
   
   $rootScope.activeCategory = $stateParams.categoryName;
 
+  var filterParams = '&fields=id,title,better_featured_image';
+
   paged = 1;
 
-  var postsApi = $rootScope.url + 'posts?page='+ paged + 'filter[category_name]=' + $stateParams.categoryName;
+  var postsApi = $rootScope.url + 'posts?page='+ paged + '&filter[category_name]=' + $stateParams.categoryName + filterParams;
+
+  $ionicLoading.show({
+    noBackdrop: false,
+    templateUrl: 'templates/directives/loader.html'
+  });
 
   $scope.loadPosts = function() {
 
@@ -150,8 +166,10 @@ angular.module('controllers')
       $scope.moreItems = true;
 
       $log.log(postsApi, response.data);
+      $ionicLoading.hide();
 
     }, function(response) {
+      $ionicLoading.hide();
       $log.log(postsApi, response.data);
     });
 
@@ -171,7 +189,7 @@ angular.module('controllers')
 
     $log.log('loadMore ' + nextPage );
 
-    var loadNextPage = $rootScope.url + 'posts?page='+ nextPage + 'filter[category_name]=' + $stateParams.categoryName;
+    var loadNextPage = $rootScope.url + 'posts?page='+ nextPage + '&filter[category_name]=' + $stateParams.categoryName + filterParams;
 
     $timeout(function() {
 

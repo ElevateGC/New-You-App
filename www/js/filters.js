@@ -4,7 +4,6 @@ angular.module('filters', [])
 
 	return function(text) {
 
-		console.log(text);
 		var htmlObject = document.createElement('div');
 		htmlObject.innerHTML = text;
 

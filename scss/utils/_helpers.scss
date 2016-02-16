@@ -5,3 +5,21 @@
   -ms-transition: all 0.25s linear;
   transition: all 0.25s linear;
 }
+
+.size-full {
+	width: 100%;
+	height: auto;
+}
+
+figure {
+	width: 100% !important;
+	height: auto;
+	img {
+		width: 100% !important;
+		height: auto !important;
+	}
+}
+
+a {
+	color: blue;
+}
