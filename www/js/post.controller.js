@@ -10,9 +10,9 @@ angular.module('controllers')
   var postCache = CacheFactory.get( 'postCache' );
 
   $scope.itemID = $stateParams.postId;
-
-  var singlePostApi = $rootScope.url + 'posts/' + $scope.itemID;
-
+  
+  var singlePostApi = $rootScope.url + 'posts/' + $scope.itemID + '?fields=id,title,link,author,content,better_featured_image,date';
+  
   $scope.loadPost = function() {
 
     // Fetch remote post
@@ -23,22 +23,29 @@ angular.module('controllers')
 
     DataLoader.get( singlePostApi ).then(function(response) {
 
-      $scope.post = response.data;
+      var authorApi = $rootScope.url + 'users/' + response.data.author;
 
-      $log.debug($scope.post);
+      DataLoader.get( authorApi ).then(function( authorResponse) {
 
-      // Don't strip post html
-      $scope.content = $sce.trustAsHtml(response.data.content.rendered);
+        $scope.post = response.data;
+        $scope.post.author = authorResponse.data;
 
-      // add post to our cache
-      postCache.put( response.data.id, response.data );
+        $log.debug($scope.post);
 
-      $ionicLoading.hide();
-    }, function(response) {
+        // Don't strip post html
+        $scope.content = $sce.trustAsHtml(response.data.content.rendered);
+
+        // add post to our cache
+        postCache.put( response.data.id, response.data );
+
+        $ionicLoading.hide();
+        }, function(response) {
+          $log.error('error', response);
+          $ionicLoading.hide();
+        });
+   }, function(response) {
       $log.error('error', response);
-      $ionicLoading.hide();
     });
-
   }
 
   if( !postCache.get( $scope.itemID ) ) {

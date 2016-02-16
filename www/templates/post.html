@@ -1,10 +1,11 @@
 <ion-view class="detail-view">
-  <ion-content>
+  <ion-content ng-if="post">
   <div class="featured-image" ng-background="{{post.better_featured_image.source_url}}" size="cover"></div>
 	<div class="post" class="padding">
 		<h1 ng-bind-html="post.title.rendered" ng-class="activeCategory"></h1>
-		<div class="item item-body" ng-if="content" ng-bind-html="content | html_filters"></div>
-  
+    <p class="created-info">Posted {{post.date | amDateFormat:'MMMM Do YYYY h:mm A'}} | {{post.author.name}}</p>
+
+    <div class="body padding" ng-bind-html="content | html_filters"></div>
 
     <div class="item tabs tabs-secondary tabs-icon-left">
       <a class="tab-item" ng-click="shareItem(post)">

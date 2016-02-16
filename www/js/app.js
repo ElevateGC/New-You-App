@@ -32,9 +32,11 @@ angular.module('NewYou', ['ionic','ionic.service.core',
   'angular-cache',
   'shared.directives',
   'ngLodash',
-  'pascalprecht.translate'
+  'pascalprecht.translate',
+  'ngSanitize',
+  'angularMoment'
 ])
-.run(function($ionicPlatform, $translate, $log, $cordovaPush, $rootScope, $http, $ionicPlatform) {
+.run(function($ionicPlatform, $translate, $log, $cordovaPush, $rootScope, $http, $ionicPlatform, amMoment) {
   var androidConfig, iosConfig, register;
  
     androidConfig = {
@@ -91,6 +93,8 @@ angular.module('NewYou', ['ionic','ionic.service.core',
           });
         }, null);
       }
+
+      amMoment.changeLocale('de');
       
       initPushwoosh();
 

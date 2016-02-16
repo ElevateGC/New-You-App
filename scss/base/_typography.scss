@@ -10,6 +10,9 @@
   font-weight:  400;
 }
 
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300);
+
+$open-sans: 'Open Sans', sans-serif;
 // @each $color-name, $color in $palettes {
 //   .#{$color-name} {
 //     background-color: palette($color-name, base);
