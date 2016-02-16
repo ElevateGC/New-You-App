@@ -1,12 +1,12 @@
 <ion-view>
-  <ion-content class="detail-view">
+  <ion-content class="detail-view" ng-if="content">
   	<div class="post">
   		<div>
   		  <div class="featured-image" ng-background="{{post.better_featured_image.source_url}}" size="cover"></div>
         <h1 ng-bind-html="post.title.rendered" ng-class="activeCategory"></h1>
         <p class="created-info">Posted {{post.date | amDateFormat:'MMMM Do YYYY h:mm A'}} | {{post.author.name}}</p>
   		</div>
-  		<div class="body padding" ng-if="content" ng-bind-html="content | html_filters"></div>
+  		<div class="body padding" ng-bind-html="content | html_filters"></div>
 
       <div class="share">
         <h1>Share</h1>

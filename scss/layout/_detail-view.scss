@@ -63,6 +63,11 @@
 		width: -moz-calc((100%/6) - 10px);
 		margin-right: 10px;
 		height: auto;
+
+		&.size-full {
+			width: 100%;
+			height: auto;
+		}
 	}
 
 	.bookmark {
