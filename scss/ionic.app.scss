@@ -15,6 +15,7 @@ $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
 
+@import "vendor/animatewithsass/animate";
 @import "utils/functions";
 @import "utils/mixins";
 @import "utils/helpers";
@@ -46,6 +47,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 @import "layout/side-menu";
 @import "layout/header";
 @import "layout/ion-content";
-@import "layout/detail-view";
 
 @import "pages/home";
+@import "pages/category-view";
+@import "pages/detail-view";

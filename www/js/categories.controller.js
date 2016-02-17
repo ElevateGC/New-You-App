@@ -4,10 +4,6 @@ angular.module('controllers')
 
   var mainCategories = [
     {
-      label: "featured",
-      id: 1074
-    },
-    {
       label: "beauty",
       id: 1032
     },
@@ -78,10 +74,10 @@ angular.module('controllers')
 
     angular.forEach(mainCategories, function(data){
 
-      var recentPosts = $rootScope.url + 'posts?filter[category_id]=' + data.id + filterParams;
+      var recentPosts = $rootScope.url + 'posts?filter[category_name]=' + data.label + filterParams;
 
       var category = {};
-      category.title = data;
+      category.title = data.label;
       category.id = category_id_count++;
 
       $scope.category_pages[data] = 2;

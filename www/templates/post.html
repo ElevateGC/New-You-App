@@ -2,7 +2,7 @@
   <ion-content class="detail-view">
   	<div class="post" ng-if="content">
   		<div>
-  		  <div class="featured-image" ng-background="{{post.better_featured_image.source_url}}" size="cover"></div>
+  		  <img ng-src="{{post.better_featured_image.source_url}}" alt="" class="featured-image">
         <h1 ng-bind-html="post.title.rendered" ng-class="activeCategory"></h1>
         <p class="created-info">Posted {{post.date | amDateFormat:'MMMM Do YYYY h:mm A'}} | {{post.author.name}}</p>
   		</div>

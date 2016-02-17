@@ -41,6 +41,12 @@ angular.module('controllers', [])
   ];
 
   $rootScope.activeCategory = $rootScope.mainCategories[0];
+
+  $rootScope.toggleSearch = false;
+
+  $scope.clickSearchIcon = function() {
+    $rootScope.toggleSearch = !$rootScope.toggleSearch
+  }
 })
 
 

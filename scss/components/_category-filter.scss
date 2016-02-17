@@ -40,6 +40,7 @@ category-filter {
 			font-size: 20px;
 			color: white;
 			margin-top: 6px;
+			transition: 0.5s linear all;
 			&.active {
 				background-color: white;
 				color: black;

@@ -9,7 +9,7 @@
       </ion-nav-buttons>
 
       <ion-nav-buttons side="right">
-        <button class="button button-icon button-clear ion-ios-search" ng-click="toggleSearch"></button>
+        <button class="button button-icon button-clear animated fadeIn" ng-class="toggleSearch ? 'ion-android-close' : 'ion-ios-search'" ng-click="clickSearchIcon()"></button>
         <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
         </button>
       </ion-nav-buttons>

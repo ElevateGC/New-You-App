@@ -1,0 +1,60 @@
+.category-view {
+
+  .search-input {
+
+    &:after {
+      @extend .ion;
+      content: $ionicon-var-ios-search;
+      color: black;
+      position: absolute;
+      right: 9%;
+      font-size: 32px;
+      line-height: 37px;
+      font-weight: 900;
+    }
+    input {
+      position: relative;
+      margin-left: 10px;
+      margin-right: 10px;
+      border-radius: 7px;
+      color: #000;
+      padding-left: 10px;
+      font-size: 18px;
+      text-transform: none !important;
+
+    }
+
+    /* when showing the picture */
+    &.ng-hide-remove {
+      animation: 0.3s fadeIn;
+      padding: 6px 0 5px 16px;
+    }
+
+    &.ng-hide-add {
+      animation: 0.5s fadeOut;
+      height: 0;
+      padding: 0;
+    }
+  }
+
+  .category-post {
+
+    &.ng-enter {
+      -webkit-animation: fadeIn 1s;
+      animation: fadeIn 1s;
+    }
+
+    &.ng-enter-stagger {
+      -webkit-animation-delay:200ms;
+      animation-delay:200ms;
+
+      /* override to make sure it's not inherited from other styles */
+      -webkit-animation-duration:0;
+      animation-duration:0;
+    }
+     &.ng-leave {
+      -webkit-animation: fadeOut 0.5s;
+      animation: fadeOut 0.5s;
+    }
+  }
+}
