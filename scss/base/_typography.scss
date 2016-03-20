@@ -10,15 +10,50 @@
   font-weight:  400;
 }
 
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,300);
+@font-face {
+  font-family: 'Oswald';
+  src: url('../fonts/Oswald-Medium.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/Oswald-Medium.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/Oswald-Medium.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/Oswald-Medium.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/Oswald-Medium.svg#fb66fb46079e6c2d5bea0ba30504a7bb') format('svg'); /* Legacy iOS */
+       
+  font-style:   normal;
+  font-weight:  400;
+}
 
-$open-sans: 'Open Sans', sans-serif;
-// @each $color-name, $color in $palettes {
-//   .#{$color-name} {
-//     background-color: palette($color-name, base);
-//   }
-// }
+@font-face {
+  font-family: 'Oswald Regular';
+  src: url('../fonts/Oswald-Regular.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/Oswald-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../fonts/Oswald-Regular.woff') format('woff'), /* Modern Browsers */
+       url('../fonts/Oswald-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('../fonts/Oswald-Regular.svg#d67d554191d502d9670fbfbb34cee6cd') format('svg'); /* Legacy iOS */
+       
+  font-style:   normal;
+  font-weight:  400;
+}
 
-h3 {
-	font-size: 24px !important;
+@font-face {
+    font-family: 'sfns_displayregular';
+    src: url('../fonts/system_san_francisco_display_regular-webfont.eot');
+    src: url('../fonts/system_san_francisco_display_regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/system_san_francisco_display_regular-webfont.woff') format('woff'),
+         url('../fonts/system_san_francisco_display_regular-webfont.ttf') format('truetype'),
+         url('../fonts/system_san_francisco_display_regular-webfont.svg#sfns_displayregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'sfns_displaybold';
+    src: url('../fonts/system_san_francisco_display_bold-webfont.eot');
+    src: url('../fonts/system_san_francisco_display_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/system_san_francisco_display_bold-webfont.woff') format('woff'),
+         url('../fonts/system_san_francisco_display_bold-webfont.ttf') format('truetype'),
+         url('../fonts/system_san_francisco_display_bold-webfont.svg#sfns_displaybold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
 }

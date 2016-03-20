@@ -4,11 +4,11 @@
     border: none;
     
     a {
-      height: $item-height;
-      line-height: $item-height;
+      height: $menu-item-height;
+      line-height: $menu-item-height;
       padding: 0 !important;
-      text-align: center !important;
-      font-size: 36px;
+      text-align: center;
+      font-size: $menu-item-font-size;
     }
 
     .item-content {
@@ -20,28 +20,53 @@
 
 .item-with-image {
   border: none;
-  background-color: black;
+  background-color: #fff;
+  margin: 0;
+  position: relative;
+  width: 100%;
 
   .item-content {
-    padding: 0 !important;
+    padding: 0;
     background-color: inherit;
   }
   h1 {
+    font-size: $slider-heading-font-size;
+    font-family: $slider-heading-font;
     position: absolute;
     bottom: 0px;
-    background-color: rgba(0,0,0,0.5);
-    color: white;
-    line-height: 32px;
-    padding: 20px;
+    background-color: $slider-heading-background;
+    color: $slider-heading-color;
+    line-height: $slider-heading-line-height;
+    padding-top: $slider-heading-padding-top;
+    padding-bottom: $slider-heading-padding-bottom;
+    padding-left: $slider-heading-padding-left;
+    padding-right: $slider-heading-padding-right;
     margin: 0;
     width: 100%;
     word-wrap: break-word;
     overflow: hidden;
     white-space: normal;
+    text-shadow: $slider-heading-text-shadow;
+    min-height: $slider-min-height;
+    .slide-image {
+      height: auto;
+      width: 100%;
+      margin: 0;
+    }
   }
-  .slide-image {
-    height: auto;
+}
+
+.cat-item {
+  position: relative;
+
+  .text {
+    position: absolute;
+    bottom: 0;
+    -webkit-margin-before:0em;
+    -webkit-margin-after:0em;
+  }
+  img {
     width: 100%;
-    margin: 0;
+
   }
 }

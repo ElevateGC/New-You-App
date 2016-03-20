@@ -6,12 +6,13 @@
 	}
 
 	h1 {
-		font-size: 36px;
+		font-family: $oswald-reg;
+		font-size: 28px;
+		text-transform: uppercase;
 		color: #262626;
-		line-height: 36px;
+		line-height: 33px;
 		text-align: center;
 		margin-top: 10px;
-		padding-bottom: 10px;
 		padding-left: 15px;
 		padding-right: 15px;
 		position: relative;
@@ -32,15 +33,27 @@
 	}
 
 	.created-info {
-		font-family: $open-sans;
-		font-size: 10px;
+		font-family: $san-reg;
+		font-size: 12px;
 		color: #262626;
 		line-height: 14px;
 		text-align: center;
+		margin-top: 10px;
+
+		&:before {
+			content: '';
+			width: 90%;
+			display: block;
+			position: relative;
+			height: 1px;
+			background-color: #000;
+			left: 5%;
+			margin-bottom: 10px;
+		}
 	}
 
 	.body {
-		font-family: $open-sans;
+		font-family: $san-reg;
 		font-size: 18px;
 		color: #262626;
 		line-height: 24px;
@@ -59,11 +72,11 @@
 		h1 {
 			color: white;
 		}
-		img {
-			width: -webkit-calc((100%/6) - 10px);
-			width: -moz-calc((100%/6) - 10px);
-			margin-right: 10px;
-			height: auto;
+		img, pin-it, pin-it span {
+			width: -webkit-calc((100%/6) - 10px) !important;
+			width: -moz-calc((100%/6) - 10px) !important;
+			margin-right: 10px !important;
+			height: auto !important;
 		}
 	}
 

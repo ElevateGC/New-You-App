@@ -7,6 +7,14 @@
   height: 40px;
   text-align: center;
   font-size: 10px;
+
+  @each $color-name, $color in $palettes {
+    &.#{$color-name} {
+      > div {
+        background-color: palette($color-name, base);
+      }
+    }
+  }
 }
 
 .spinner > div {

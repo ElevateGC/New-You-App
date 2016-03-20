@@ -9,6 +9,10 @@
     "angular-translate": "~2.8.1",
     "angular-sanitize": "^1.5.0",
     "angular-moment": "^0.10.3",
-    "moment": "^2.11.2"
+    "moment": "^2.11.2",
+    "ionic-filter-bar": "^1.1.1",
+    "angular-socialshare": "angularjs-socialshare#^0.1.20",
+    "ion-floating-menu": "^1.0.1",
+    "angular-youtube-api-factory": "^0.6.0"
   }
 }

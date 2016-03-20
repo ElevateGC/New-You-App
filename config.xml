@@ -16,6 +16,9 @@
   <preference name="SplashScreen" value="screen"/>
   <preference name="SplashScreenDelay" value="3000"/>
   <preference name="AllowInlineMediaPlayback" value="true"/>
+  <platform name="ios">
+    <preference name="KeyboardDisplayRequiresUserAction" value="false"/>
+  </platform>
   <feature name="SocialSharing">
     <param name="ios-package" value="SocialSharing"/>
   </feature>

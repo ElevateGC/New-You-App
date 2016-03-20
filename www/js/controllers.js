@@ -11,10 +11,6 @@ angular.module('controllers', [])
 
   $rootScope.mainCategories = [
     {
-      label: "featured",
-      id: 1074
-    },
-    {
       label: "beauty",
       id: 1032
     },
@@ -42,10 +38,9 @@ angular.module('controllers', [])
 
   $rootScope.activeCategory = $rootScope.mainCategories[0];
 
-  $rootScope.toggleSearch = false;
-
   $scope.clickSearchIcon = function() {
-    $rootScope.toggleSearch = !$rootScope.toggleSearch
+    console.log($scope)
+    $scope.$emit('showFilterBar');
   }
 })
 

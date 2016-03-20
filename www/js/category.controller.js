@@ -1,10 +1,13 @@
 angular.module('controllers')
 
-.controller('CategoryCtrl', function( $scope, $http, DataLoader, $timeout, $ionicSlideBoxDelegate, $ionicLoading, $rootScope, $log, lodash, $stateParams ) {
+.controller('CategoryCtrl', function( $scope, $http, DataLoader, $timeout, $ionicSlideBoxDelegate, $ionicLoading, $rootScope, $log, lodash, $stateParams, $ionicFilterBar, $ionicScrollDelegate ) {
 
   $scope.moreItems = false;
   
   $rootScope.activeCategory = $stateParams.categoryName;
+
+  $rootScope.searchPage = 'category';
+
   var categoryIndex = lodash.findIndex($rootScope.mainCategories, {label: $stateParams.categoryName});
 
   $scope.activefilter = $rootScope.mainCategories[categoryIndex].id;
@@ -19,6 +22,24 @@ angular.module('controllers')
     noBackdrop: false,
     templateUrl: 'templates/directives/loader.html'
   });
+
+  var filterBarInstance;
+
+  $rootScope.$on('showFilterBar', function (event, args) {
+    if ($rootScope.searchPage = 'category') {
+      filterBarInstance = $ionicFilterBar.show({
+        items: $scope.posts,
+        update: function (filteredposts, filterText) {
+          $scope.posts = filteredposts;
+          $ionicScrollDelegate.$getByHandle('category-scroll').resize();
+          if (filterText) {
+            console.log(filterText);
+          }
+        }
+      });
+    }
+ });
+
 
   $scope.loadPosts = function() {
 
@@ -51,10 +72,15 @@ angular.module('controllers')
   $scope.loadPosts();
 
   // Load more (infinite scroll)
-$scope.loadMore = function() {
+  $scope.loadMore = function() {
 
     if( !$scope.moreItems ) {
       return;
+    }
+
+    if (filterBarInstance) {
+      filterBarInstance();
+      filterBarInstance = null;
     }
 
     var nextPage = paged++;
@@ -92,17 +118,17 @@ $scope.loadMore = function() {
 
   // Pull to refresh
   $scope.doRefresh = function() {
+
+    if (filterBarInstance) {
+      filterBarInstance();
+      filterBarInstance = null;
+    }
   
     $timeout( function() {
-
       $scope.loadPosts();
-
       //Stop the ion-refresher from spinning
       $scope.$broadcast('scroll.refreshComplete');
-    
     }, 1000);
-      
   };
-    
 
 })

@@ -1,22 +1,56 @@
-$horizontal-scroll-component-width: 100% !default;
-$horizontal-scroll-component-height: auto !default;
-$horizontal-scroll-component-border: 1px solid #ddd !default;
-$horizontal-scroll-component-padding: 8px !default;
+$san-reg: 'sfns_displayregular';
+$san-bold: 'sfns_displaybold';
+$oswald-medium: 'Oswald';
+$oswald-reg: 'Oswald Regular';
 
-$horizontal-scroll-title-color: #fff !default;
-$horizontal-scroll-height: 224px !default;
+$scroll-component-width: 100% !default;
+$scroll-component-height: auto !default;
+$scroll-component-border: 1px solid #ddd !default;
+$scroll-component-padding: 8px !default;
 
-$horizontal-scroll-item-height: 100% !default;
-$horizontal-scroll-item-margin: 3px !default;
-$horizontal-scroll-item-width: 40% !default;
+$scroll-height: 224px !default;
+$scroll-heading-color: white !default;
+$scroll-heading-size: 30px !default;
 
-$horizontal-scroll-item-image-height: 100% !default;
-$horizontal-scroll-item-image-width: 100% !default;
+$scroll-item-height: 100% !default;
+$scroll-item-margin: 4px !default;
+$scroll-item-width: 40% !default;
+$scroll-image-height: 100% !default;
+$scroll-image-width: 100% !default;
 
-$horizontal-scroll-item-title-font-size: 18px !default;
-$horizontal-scroll-item-title-bg: rgba(0,0,0,0.6) !default;
-$horizontal-scroll-item-title-width: 100% !default;
-$horizontal-scroll-item-title-color: white !default;
-$horizontal-scroll-item-title-padding: 10px !default;
+$scroll-title-font: $san-bold !default;
+$scroll-title-font-size: 14px !default;
+$scroll-title-line-height: $scroll-title-font-size + 2px !default;
+$scroll-title-bg: rgba(255,255,255, 1) !default;
+$scroll-title-width: 100% !default;
+$scroll-title-color: black !default;
+$scroll-title-padding: 10px !default;
 
-$item-height: 67px !default;
+
+$slider-heading-font: $san-bold;
+$slider-heading-font-size: 18px !default;
+$slider-heading-line-height: $slider-heading-font-size + 4px !default;
+$slider-heading-padding-top: 15px !default;
+$slider-heading-padding-bottom: 15px !default;
+$slider-heading-padding-left: 15px !default;
+$slider-heading-padding-right: 60px !default;
+$slider-heading-color: #000 !default;
+
+$slider-heading-text-shadow: none !default;
+$slider-heading-background: rgba(255,255,255,1) !default;
+$slider-min-height: 0px !default;
+
+$menu-item-height: 67px !default;
+$menu-item-font-size: 36px !default;
+
+// filter styles
+$filter-font: $san-bold;
+$filter-padding: 5px !default;
+$filter-border: 2px solid white !default;
+$filter-margin-top: 8px !default;
+$filter-margin-right: 8px !default;
+$filter-font-size: 14px !default;
+$filter-color: white !default;
+$filter-background: transparent !default;
+$filter-active-background: white !default;
+$filter-active-color: black !default;

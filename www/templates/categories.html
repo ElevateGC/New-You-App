@@ -1,21 +1,31 @@
 <ion-view>
-<ion-content class="home" overflow-scroll="true">
-<ion-refresher on-refresh="doRefresh()"></ion-refresher>
-<ion-slide-box ng-if="recentPosts" on-slide-changed="slideHasChanged($index)" auto-play="true" does-continue="true" show-pager="false">
-  <ion-slide ng-repeat="post in recentPosts" class="slide">
-    <div class="tag"></div>
-    <h1 ng-bind-html="post.title.rendered"></h1>
-    <img ng-src="{{post.better_featured_image.source_url}}" alt="" class="slide-image">
-  </ion-slide>
-</ion-slide-box>
-<div class="horizontal-scroll-component" ng-repeat="category in categories | orderBy: 'id'" ng-class="category.title">
-  <h1 class="horizontal-scroll-title" ng-bind-html="category.title"></h1>
-  <div class="horizontal-scroll">
-    <a class="scroll-item" ng-repeat="post in category.posts track by $index" href="#/app/posts/{{post.id}}" track>
-      <div class="scroll-item-title" ng-bind-html="post.title.rendered"></div>
-      <div class="scroll-item-image" ng-background="{{post.better_featured_image.source_url}}" size="cover" ></div>
-    </a>
-  </div>
+  <ion-content class="home" overflow-scroll="true" delegate-handle="featured-scroll">
+  <!-- <ion-refresher on-refresh="doRefresh()"></ion-refresher> -->
+  <ion-slide-box
+  ng-if="recentPosts"
+  on-slide-changed="slideHasChanged($index)"
+  auto-play="true" 
+  does-continue="true" 
+  show-pager="false"
+  ng-style="{'height': postHeight}">
+    <ion-slide 
+      ng-repeat="post in recentPosts"
+      class="slide"
+      ng-click="goToPost(post)"
+      ng-style="{'height': postHeight}"
+      ng-background="{{post.better_featured_image.source_url}}">
+      <div class="tag"></div>
+      <h1 ng-bind-html="post.title.rendered"></h1>
+    </ion-slide>
+  </ion-slide-box>
+  <div class="horizontal-scroll-component" ng-repeat="category in categories | orderBy: 'id'" ng-class="category.label">
+    <h1 class="horizontal-scroll-title" ng-bind-html="category.label"></h1>
+    <div class="horizontal-scroll">
+      <a class="scroll-item" ng-repeat="post in category.posts track by $index" ng-click="goToPost(post)" track>
+        <div class="scroll-item-title" ng-bind-html="post.title.rendered"></div>
+        <div class="scroll-item-image" ng-background="{{post.better_featured_image.source_url}}" size="cover" ></div>
+      </a>
     </div>
+  </div>
   </ion-content>
 </ion-view>

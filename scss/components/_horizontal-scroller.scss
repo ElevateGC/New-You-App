@@ -1,7 +1,7 @@
 .horizontal-scroll-component {
 
-	height: $horizontal-scroll-component-height;
-  width: $horizontal-scroll-component-width;
+	height: $scroll-component-height;
+  width: $scroll-component-width;
 
 	@each $color-name, $color in $palettes {
 	  &.#{$color-name} {
@@ -11,48 +11,61 @@
 
 	h1.horizontal-scroll-title {
 		@extend .remove-extras;
-		color: $horizontal-scroll-title-color;
-		text-align: center;
+		color: $scroll-heading-color;
+		text-align: left;
 		margin: 0;
+		font-size: $scroll-heading-size;
+		line-height: $scroll-heading-size;
+		padding-top: 8px;
+  	padding-bottom: 3px;
+  	padding-left: $slider-heading-padding-left;
+  	letter-spacing: 1px;
 	}
 
 	.horizontal-scroll {
 		overflow-x: auto;
   	overflow-y: hidden ;
   	white-space: nowrap;
-  	height: $horizontal-scroll-height;
+  	height: $scroll-height;
+  	padding-bottom: $scroll-item-margin * 2;
 
   	.scroll-item {
 			display: inline-block;
 			position: relative;
-			height: $horizontal-scroll-item-height;
-			margin: $horizontal-scroll-item-margin;
-			margin-bottom: 0;
+			height: $scroll-item-height;
+			margin: $scroll-item-margin;
+			// margin-bottom: 0;
 			margin-top: 0;
-			width: $horizontal-scroll-item-width;
+			width: $scroll-item-width;
 			
 			&:first-child {
-				margin-left: 0;	
+				margin-left: $scroll-item-margin * 2;	
 			}
+			&:last-child {
+				margin-right: $scroll-item-margin * 2;	
+			} 
 
   		.scroll-item-image {
-			  height: $horizontal-scroll-item-image-height;
-			  width: $horizontal-scroll-item-image-width;
+			  height: $scroll-image-height;
+			  width: $scroll-image-width;
 			  background-position: center center;
+			  box-shadow: 0px 3px 3px rgba(0,0,0,0.22);
 			}
 
 			.scroll-item-title {
+				font-family: $scroll-title-font;
 				position: absolute;
 				bottom: 0;
-				width: $horizontal-scroll-item-title-width;
-				color: white;
-				font-size: $horizontal-scroll-item-title-font-size;
-				background-color: $horizontal-scroll-item-title-bg;
+				width: $scroll-title-width;
+				color: $scroll-title-color;
+				font-size: $scroll-title-font-size;
+				background-color: $scroll-title-bg;
 				margin: 0;
-				padding: $horizontal-scroll-item-title-padding;
+				padding: $scroll-title-padding;
 				word-wrap: break-word;
   			overflow: hidden;
     		white-space: normal;
+    		line-height: $scroll-title-line-height;
 			}
   	}
 	}

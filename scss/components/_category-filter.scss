@@ -32,19 +32,29 @@ category-filter {
 
 	ul {
 		li {
+			font-family: $filter-font;
+			text-transform: capitalize;
 			display: inline-block;
-			margin-right: 6px;
-			background-color: transparent;
-			border: 2px solid white;
-			padding: 6px;
-			font-size: 20px;
+			margin-right: $filter-margin-right;
+			background-color: $filter-background;
+			border: $filter-border;
+			padding: $filter-padding;
+			font-size: $filter-font-size;
 			color: white;
-			margin-top: 6px;
+			margin-top: $filter-margin-top;
 			transition: 0.5s linear all;
 			&.active {
-				background-color: white;
-				color: black;
+				background-color: $filter-active-background;
+				color: $filter-active-color;
 			}
 		}
+	}
+}
+
+.no-results {
+	h1 {
+		color: white;
+		text-align: center;
+		transition: 0.5s linear all;
 	}
 }

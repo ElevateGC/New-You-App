@@ -7,7 +7,7 @@ angular.module('shared.directives', [])
        if(!n) return;
        element.css({
         'background-image': 'url(' + n + ')',
-        'background-size' : attrs.size,
+        'background-size' : 'cover',
         'background-repeat' : 'no-repeat',
         'background-position' : 'center center'
       });
@@ -41,13 +41,15 @@ angular.module('shared.directives', [])
     restrict: 'E',
     scope: {
       category: '=',
-      activefilter: '='
+      activefilter: '=',
+      posts: '@'
     },
     templateUrl: 'templates/directives/category-filter.html',
     controller: function($scope, $element, $attrs){
 
       switch ($scope.category) {
-        case "health":
+        //health
+        case 1033:
           $scope.filters = 
           [ 
             {
@@ -77,7 +79,8 @@ angular.module('shared.directives', [])
           ];
           break;
 
-        case "wellness":
+          //wellness
+        case 1034:
           $scope.filters = 
           [ 
             {
@@ -111,7 +114,8 @@ angular.module('shared.directives', [])
           ]
           break;
 
-        case "beauty":
+          //beauty
+        case 1032:
           $scope.filters =[ 
             {
               label: "show all",
@@ -156,7 +160,8 @@ angular.module('shared.directives', [])
           ]
           break;
 
-        case "fashion":
+          //fashion
+        case 1269:
           $scope.filters = [
             {
               label: "show all",
@@ -165,7 +170,8 @@ angular.module('shared.directives', [])
           ]
           break;
 
-        case "celebrity":
+          //celebrity
+        case 1035:
           $scope.filters =[ 
             {
               label: "show all",
@@ -186,7 +192,8 @@ angular.module('shared.directives', [])
           ]
           break;
 
-        case "entertainment":
+          //entertainment
+        case 1037:
         $scope.filters =[ 
             {
               label: "show all",
