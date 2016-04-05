@@ -10,7 +10,10 @@ $scroll-component-padding: 8px !default;
 
 $scroll-height: 224px !default;
 $scroll-heading-color: white !default;
-$scroll-heading-size: 30px !default;
+$scroll-heading-size: 24px !default;
+$scroll-heading-text-transform: uppercase !default;
+$scroll-heading-font: $oswald-medium !default;
+$scroll-heading-letter-spacing: 0.78 !default;
 
 $scroll-item-height: 100% !default;
 $scroll-item-margin: 4px !default;
@@ -25,11 +28,12 @@ $scroll-title-bg: rgba(255,255,255, 1) !default;
 $scroll-title-width: 100% !default;
 $scroll-title-color: black !default;
 $scroll-title-padding: 10px !default;
-
+$scroll-title-text-align: left !default;
+$scroll-title-min-height: 70px !default;
 
 $slider-heading-font: $san-bold;
-$slider-heading-font-size: 18px !default;
-$slider-heading-line-height: $slider-heading-font-size + 4px !default;
+$slider-heading-font-size: 22px !default;
+$slider-heading-line-height: 25px !default;
 $slider-heading-padding-top: 15px !default;
 $slider-heading-padding-bottom: 15px !default;
 $slider-heading-padding-left: 15px !default;

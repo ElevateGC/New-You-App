@@ -1,5 +1,25 @@
 .slider {
 	overflow: inherit;
+
+	.tag {
+		font-family: $scroll-heading-font;
+		text-transform: $scroll-heading-text-transform;
+		width: auto;
+		position: absolute;
+		top: 20px;
+		font-size: $scroll-heading-size - 10;
+		letter-spacing: $scroll-heading-letter-spacing;
+		left: $slider-heading-padding-left;
+		padding: 4px 8px;
+		line-height: 18px;
+		border-radius: 4px;
+		color: white;
+		@each $color-name, $color in $palettes {
+		  &.#{$color-name} {
+		    background-color: palette($color-name, base);
+		  }
+		}
+	}
 	h1 {
 		font-size: $slider-heading-font-size;
     font-family: $slider-heading-font;

@@ -1,7 +1,8 @@
 <ion-view>
   <ion-content class="category-view" delegate-handle="category-scroll" ng-class="activeCategory.label">
   <ion-refresher 
-    on-refresh="doRefresh()" 
+    ng-if = "canLoad"
+    on-refresh="loadMore('refresh')" 
     ng-class="activeCategory"
     spinner="lines"
     pulling-icon="ion-ios-arrow-down">
@@ -23,15 +24,15 @@
 		</div>
 	</ion-list>
   <div ng-if="posts !== undefined && !posts.length" class="no-results padding animated fadeIn">
-    <h1>No Results</h1>
+    <h1 class="no-results padding">No Results</h1>
   </div>
   <div ng-if="posts !== undefined && hasNoPosts.indexOf(activefilter) > -1" class="padding animated fadeIn">
-  <h1>No posts found</h1>
+  <h1 ng-show="filteredItems.length == 0" class="no-results padding">No posts found</h1>
   </div>
 
 	<ion-infinite-scroll
-	 ng-if="moreDataExists()"
-    on-infinite="loadMore()"
+    ng-if="posts !== undefined && hasNoPosts.indexOf(activefilter) == -1 && canLoad"
+    on-infinite="loadMore('infinite')"
     distance="1%"
     immediate-check="false"
     spinner="lines">

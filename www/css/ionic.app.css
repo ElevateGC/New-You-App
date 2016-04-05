@@ -17216,21 +17216,29 @@ a.button {
   .horizontal-scroll-component.videos {
     background-color: #000; }
   .horizontal-scroll-component h1.horizontal-scroll-title {
+    font-family: "Oswald";
     color: white;
     text-align: left;
     margin: 0;
-    font-size: 30px;
-    line-height: 30px;
+    font-size: 24px;
+    line-height: 24px;
+    text-transform: uppercase;
     padding-top: 8px;
-    padding-bottom: 3px;
+    padding-bottom: 8px;
     padding-left: 15px;
-    letter-spacing: 1px; }
+    letter-spacing: 0.78; }
   .horizontal-scroll-component .horizontal-scroll {
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
     height: 224px;
-    padding-bottom: 8px; }
+    padding-bottom: 8px;
+    -webkit-scroll-snap-type: mandatory;
+    -ms-scroll-snap-type: mandatory;
+    scroll-snap-type: mandatory;
+    -webkit-scroll-snap-points-x: repeat(100%);
+    -ms-scroll-snap-points-x: repeat(100%);
+    scroll-snap-points-x: repeat(100%); }
     .horizontal-scroll-component .horizontal-scroll .scroll-item {
       display: inline-block;
       position: relative;
@@ -17260,7 +17268,11 @@ a.button {
         word-wrap: break-word;
         overflow: hidden;
         white-space: normal;
-        line-height: 16px; }
+        line-height: 16px;
+        height: 72px; }
+        .horizontal-scroll-component .horizontal-scroll .scroll-item .scroll-item-title p {
+          height: 100%;
+          margin: 0; }
 
 category-filter {
   display: block;
@@ -17352,6 +17364,9 @@ category-filter {
     .item-input input[type="search"]:-moz-placeholder {
       /* Firefox 18- */
       color: white; }
+
+.filter-bar-search, .filter-bar-cancel {
+  font-family: "sfns_displayregular"; }
 
 .item-beauty {
   border: none; }
@@ -17459,13 +17474,13 @@ category-filter {
     padding: 0;
     background-color: inherit; }
   .item-with-image h1 {
-    font-size: 18px;
+    font-size: 22px;
     font-family: "sfns_displaybold";
     position: absolute;
     bottom: 0px;
     background-color: white;
     color: #000;
-    line-height: 22px;
+    line-height: 25px;
     padding-top: 15px;
     padding-bottom: 15px;
     padding-left: 15px;
@@ -17494,14 +17509,43 @@ category-filter {
 
 .slider {
   overflow: inherit; }
+  .slider .tag {
+    font-family: "Oswald";
+    text-transform: uppercase;
+    width: auto;
+    position: absolute;
+    top: 20px;
+    font-size: 14px;
+    letter-spacing: 0.78;
+    left: 15px;
+    padding: 4px 8px;
+    line-height: 18px;
+    border-radius: 4px;
+    color: white; }
+    .slider .tag.beauty {
+      background-color: #ED2B8B; }
+    .slider .tag.health {
+      background-color: #1DAFEC; }
+    .slider .tag.wellness {
+      background-color: #ACCD73; }
+    .slider .tag.fashion {
+      background-color: #F69831; }
+    .slider .tag.celebrity {
+      background-color: #7B3B93; }
+    .slider .tag.entertainment {
+      background-color: #F0373B; }
+    .slider .tag.featured {
+      background-color: #000; }
+    .slider .tag.videos {
+      background-color: #000; }
   .slider h1 {
-    font-size: 18px;
+    font-size: 22px;
     font-family: "sfns_displaybold";
     position: absolute;
     bottom: 0px;
     background-color: white;
     color: #000;
-    line-height: 22px;
+    line-height: 25px;
     padding-top: 15px;
     padding-bottom: 15px;
     padding-left: 15px;
@@ -17617,6 +17661,16 @@ category-filter {
 iframe {
   width: 100%; }
 
+.footer-links {
+  display: inline-block;
+  padding-left: 13px;
+  padding-top: 10px; }
+  .footer-links a {
+    text-decoration: none;
+    font-size: 12px;
+    color: #858585;
+    font-family: "sfns_displayregular"; }
+
 .nav-logo {
   height: inherit;
   width: 60px;
@@ -17685,6 +17739,9 @@ ion-content.featured {
 ion-content.videos {
   background-color: #000;
   border-top: 6px solid #000; }
+
+.category-view .no-results {
+  color: white; }
 
 .category-view .search-input {
   /* when showing the picture */ }
@@ -17863,4 +17920,5 @@ ion-content.videos {
     color: white; }
 
 .videos .video {
-  width: 100%; }
+  width: 100%;
+  background-size: 150% !important; }

@@ -1,6 +1,6 @@
 angular.module('controllers')
 
-.controller('CategoriesCtrl', function( $scope, $http, DataLoader, $timeout, $ionicSlideBoxDelegate, $ionicLoading, $rootScope, $log, lodash ) {
+.controller('CategoriesCtrl', function( $scope, $http, DataLoader, $timeout, $ionicSlideBoxDelegate, $ionicLoading, $rootScope, $log, lodash) {
 
   var mainCategories = [
     {
@@ -162,4 +162,5 @@ angular.module('controllers')
     }, 1000);
       
   };
+
 })

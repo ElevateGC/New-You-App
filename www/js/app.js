@@ -86,9 +86,10 @@ angular.module('NewYou', [
   '720kb.socialshare',
   'ion-floating-menu',
   'youtube-embed',
-  'jtt_youtube'
+  'jtt_youtube',
+  'dibari.angular-ellipsis'
 ])
-.run(function($ionicPlatform, $translate, $log, $cordovaPush, $rootScope, $http, amMoment, $window) {
+.run(function($ionicPlatform, $translate, $log, $cordovaPush, $rootScope, $http, amMoment, $window, $ionicConfig) {
   
   var tag = document.createElement('script');
   tag.src = "http://www.youtube.com/iframe_api";
@@ -139,6 +140,7 @@ angular.module('NewYou', [
     return $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
+      $ionicConfig.scrolling.jsScrolling(false)
       if ($window.cordova && $window.cordova.plugins.Keyboard) {
         $window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         $window.cordova.plugins.Keyboard.disableScroll(true);
@@ -220,61 +222,7 @@ angular.module('NewYou', [
     views: {
       'menuContent': {
         templateUrl: "templates/categories.html",
-        controller: function($rootScope, $scope, Category, $ionicLoading, $timeout, $ionicScrollDelegate, $state) {
-
-          function loadData() {
-            $ionicLoading.show({
-              noBackdrop: false,
-              templateUrl: 'templates/directives/loader.html'
-            });
-            Category.recent().then(function(response) {
-              $scope.recentPosts = response;
-              var firstPost = response[0];
-              $scope.postHeight = firstPost.better_featured_image.media_details.height * $rootScope.deviceWidth/ firstPost.better_featured_image.media_details.width + 'px'
-              $ionicLoading.hide();
-            })
-            $scope.categories = Category.loadAll();
-            $ionicScrollDelegate.$getByHandle('featured-scroll').resize();
-          }
-
-          //this event will only happen once per view being created
-          $scope.$on('$ionicView.loaded', function(){
-            loadData();
-          });
-
-          //happens every time the view is loaded
-          $scope.$on('$ionicView.beforeEnter', function() {
-            $scope.activeCategory = Category.filters(1074);
-            $rootScope.activeCategoryHeader = $scope.activeCategory;
-            $rootScope.searchPage = false;
-          });
-
-          //this event will trigger when the view has finished leaving and is no longer the active view.
-          $scope.$on('$ionicView.afterLeave', function(){
-            console.log('view has left')
-          });
-
-          $scope.goToPost = function(post) {
-            angular.forEach(post.categories, function(cat) {
-              if (cat != 1074 && Category.filters(cat) != null) {
-                $rootScope.activeCategoryHeader = Category.filters(cat);
-                $state.go('app.post', {id: post.id});
-                return;
-              }
-            })
-          }
-
-          $scope.doRefresh = function() {
-            $timeout( function() {
-             loadData();
-              //Stop the ion-refresher from spinning
-              $scope.$broadcast('scroll.refreshComplete');
-            
-            }, 1000);
-              
-          };
-
-        }
+        controller: "FeaturedCtrl"
       }
     }
   })
@@ -284,130 +232,7 @@ angular.module('NewYou', [
     views: {
       'menuContent': {
         templateUrl: "templates/category.html",
-        controller: function($rootScope, $scope, $stateParams, Category, lodash, $ionicLoading, $timeout, $ionicFilterBar, $log, $ionicScrollDelegate) {
-
-          //push all category filters that are loaded when viewing page in this array
-          $scope.filters = [];
-          //we do this so that we can keep track of the paging associated with each filter category id
-
-          //create empty array to add ids of the categories which have no more data to load
-          $scope.hasNoPosts = [];
-
-          var category = {};
-          function loadCategory(categoryId, page) {
-
-
-            //hide search filter if visible
-            if (filterBarInstance) {
-              filterBarInstance();
-              filterBarInstance = null;
-            }
-
-            var url = wordpress_url + categoryId + '&page=' + page + url_params;
-            return Category.all_posts(url).then(function(resp){
-              console.log(resp)
-              return resp;
-            })
-          }
-
-
-          $scope.moreItems = false;
-
-          //this event will only happen once per view being created
-          $scope.$on('$ionicView.loaded', function(){
-
-            $ionicLoading.show({
-              noBackdrop: false,
-              templateUrl: 'templates/directives/loader.html'
-            });
-            $scope.activeCategory = Category.filters($stateParams.id);
-            $scope.activefilter = $scope.activeCategory.id;
-            $rootScope.activeCategoryHeader = $scope.activeCategory;
-          })
-
-
-          $scope.$on('$ionicView.beforeEnter', function() {
-            $rootScope.searchPage = true;
-            $rootScope.activeCategoryHeader = $scope.activeCategory;
-            $scope.activeCategory = Category.filters($stateParams.id);
-          })
-
-          //on first load grab posts for active category
-          loadCategory($stateParams.id, 1).then(function(resp) {
-
-            $scope.posts = resp;
-            var firstPost = resp[0];
-            $scope.postHeight = firstPost.better_featured_image.media_details.height * $rootScope.deviceWidth/ firstPost.better_featured_image.media_details.width + 'px'
-              
-
-            angular.forEach($scope.activeCategory.filters, function(filter, index) {
-              filter.page = 1;
-              $scope.filters.push(filter);
-            });
-            $ionicLoading.hide();
-          });
-          console.log('active category', $scope.activeCategory);
-          console.log('active filter', $scope.activefilter);
-
-          $scope.$watch(function () {
-            $scope.filteredItems = $scope.$eval("posts | filter:{'categories': activefilter} | unique:'id' | filter: searchFilter");
-          });
-
-          $scope.setActiveFilter = function(filterId) {
-            $scope.activefilter = filterId;
-            console.log('set new active filterId', $scope.activefilter);
-            $timeout(function() {
-              if ($scope.filteredItems.length  === 0 && $scope.hasNoPosts.indexOf(filterId) == -1) {
-                $ionicLoading.show({
-                  noBackdrop: false,
-                  templateUrl: 'templates/directives/loader.html'
-                });
-
-                //look at array of filters for current category
-                //find active filter object in that array by looking up the active filterId
-                //increment page number by 1 and load posts associated with that filterId
-                //create new posts array by merging posts array with response array
-                //if response is empty add filterId to the hasNoPosts array
-                //so you can compare activeFilterId with items in hasNoPosts
-                lodash.find($scope.filters, function(item, index) {
-                  if (item.id == filterId) {
-                    item.page++
-                    console.log($scope.filters)
-                    loadCategory(item.id, item.page).then(function(resp) {
-                      var newPosts = lodash.uniq($scope.posts.concat(resp));
-                      $scope.posts = newPosts;
-                      if (resp.length === 0) {
-                        $scope.hasNoPosts.push(item.id);
-                      }
-                      $ionicLoading.hide();
-                    })
-                  }
-                })
-              }
-            }, 100)
-            $ionicScrollDelegate.$getByHandle('category-scroll').resize();
-          }
-
-          $scope.moreDataExists = function() {
-            return $scope.moreItems;
-          }
-
-
-          var filterBarInstance;
-
-          $rootScope.$on('showFilterBar', function (event, args) {
-            filterBarInstance = $ionicFilterBar.show({
-              items: $scope.posts,
-              update: function (filteredposts, filterText) {
-                $scope.posts = filteredposts;
-                $ionicScrollDelegate.$getByHandle('category-scroll').resize();
-                if (filterText) {
-                  console.log(filterText);
-                }
-              }
-            });
-          });
-        }
+        controller: "CategoryCtrl"
       }
     }
   })
@@ -428,222 +253,20 @@ angular.module('NewYou', [
     views: {
       'menuContent': {
         templateUrl: "templates/post.html",
-        controller: function($rootScope, $scope, CacheFactory, $stateParams, $log, $sce, Category, $ionicLoading, $cordovaSocialSharing) {
-
-          function loadPost(id) {
-            return Category.get(id).then(function(resp){
-              console.log(resp)
-              return resp;
-            })
-          }
-
-          //this event will only happen once per view being created
-          $scope.$on('$ionicView.loaded', function(){
-          });
-
-          //happens every time the view is loaded
-          $scope.$on('$ionicView.enter', function() {
-
-            $rootScope.searchPage = false;
-
-            if ( ! CacheFactory.get('postCache') ) {
-              CacheFactory.createCache('postCache');
-            }
-
-            var postCache = CacheFactory.get( 'postCache' );
-
-            if( !postCache.get( $stateParams.id ) ) {
-              // Item is not in cache, go get it
-              $ionicLoading.show({
-                noBackdrop: true,
-                templateUrl: 'templates/directives/loader-color.html'
-              });
-              loadPost($stateParams.id).then(function(resp) {
-                $scope.post = resp;
-                angular.forEach($scope.post.categories, function(cat) {
-                  if (cat != 1074 && Category.filters(cat) != null) {
-                    $rootScope.activeCategoryHeader = Category.filters(cat);
-                  }
-                })
-                $scope.content = $sce.trustAsHtml(resp.content.rendered);
-                $ionicLoading.hide();
-              });
-
-            } else {
-               $ionicLoading.hide();
-              // Item exists, use cached item
-              $scope.post = postCache.get( $stateParams.id );
-              angular.forEach($scope.post.categories, function(cat) {
-                if (cat != 1074 && Category.filters(cat) != null) {
-                  $rootScope.activeCategoryHeader = Category.filters(cat);
-                }
-              })
-              $scope.content = $sce.trustAsHtml( $scope.post.content.rendered );
-              // $scope.comments = $scope.post._embedded['replies'][0];
-            }
-          });
-
-        $scope.shareViaFacebook = function(post) {
-          $ionicLoading.show({
-            noBackdrop: true,
-            templateUrl: 'templates/directives/loader-color.html',
-            duration: 500
-          });
-            $cordovaSocialSharing
-            .shareViaFacebook(post.title.rendered, post.better_featured_image.source_url, post.link)
-            .then(function(result) {
-              // Success!
-              $ionicLoading.hide();
-            }, function(err) {
-              $ionicLoading.hide();
-               // alert('There was an error sharing to Facebook.');
-              // An error occurred. Show a message to the user
-            });
-          }
-
-          $scope.shareViaInstagram = function(post) {
-            $ionicLoading.show({
-              noBackdrop: true,
-              templateUrl: 'templates/directives/loader-color.html',
-              duration: 500
-            });
-            convertImgToDataURLviaCanvas(post.better_featured_image.source_url, function(base64Img){
-                Instagram.share(base64Img, post.title.rendered, function (err) {
-                  if (err) {
-                      console.log("not shared");
-                  } else {
-                      console.log("shared");
-                  }
-              });
-            });
-          }
-
-          $scope.shareViaPinterest = function(post) {
-            $cordovaSocialSharing
-            .shareViaPinterest(post.title.rendered, post.better_featured_image.source_url, post.link)
-            .then(function(result) {
-              // Success!
-              $ionicLoading.hide();
-            }, function(err) {
-              // An error occurred. Show a message to the user
-            });
-          }
-
-          $scope.shareViaTwitter = function(post) {
-            $ionicLoading.show({
-              noBackdrop: true,
-              templateUrl: 'templates/directives/loader-color.html',
-              duration: 500
-            });
-            $cordovaSocialSharing
-            .shareViaTwitter(post.title.rendered, post.better_featured_image.source_url, post.link)
-            .then(function(result) {
-              // Success!
-              $ionicLoading.hide();
-            }, function(err) {
-              $ionicLoading.hide();
-              // alert('There was an error sharing to Twitter.');
-              // An error occurred. Show a message to the user
-            });
-          }
-        }
+        controller: "PostCtrl"
       }
     }
   })
 
   .state('app.videos', {
-      url: "/videos",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/videos.html",
-          controller: function($scope, $state, $stateParams, $rootScope, youtubeFactory, $ionicLoading, $ionicModal) {
-            $scope.videos = [];
-            $scope.showPlayer = false;
-            $ionicLoading.show();
-            var youTubeApiKey = "AIzaSyCMEpsJej_aAhAQa3kGo_-m6q3OREGDOYM";
-            youtubeFactory.getVideosFromChannelById({
-              channelId: "UCEf9tCFR9u8eorfLdLlHh0A",
-              // q: "<SEARCH_STRING>", // (optional) filters the channel result with your search string
-              order: "date", // (optional) valid values: 'date', 'rating', 'relevance', 'title', 'videoCount', 'viewCount' | default: 'date'
-              // publishedAfter: "<PUBLISHED_AFTER>", // (optional) RFC 3339 formatted date-time value (1970-01-01T00:00:00Z)
-              // publishedBefore: "<PUBLISHED_AFTER>", // (optional) RFC 3339 formatted date-time value (1970-01-01T00:00:00Z)
-              // regionCode: "<REGION_CODE>", // (optional) ISO 3166-1 alpha-2 country code
-              // relevanceLanguage: "<RELEVANCE_LANGUAGE>", // (optional) ISO 639-1 two-letter language code
-              // safeSearch: "<SAFE_SEARCH>", // (optional) valid values: 'moderate','none','strict' | defaut: 'moderate'
-              maxResults: "50", // (optional) valid values: 0-50 | default: 5
-              // videoEmbeddable: "<VIDEO_EMBEDDABLE>", // (optional) valid values: 'true', 'any' | default: 'true'
-              // videoLicense: "<VIDEO_LICENSE>", // (optional) valid values: 'any','creativeCommon','youtube'
-              // videoSyndicated: "<VIDEO_SYNDICATED>", // (optional) restrict a search to only videos that can be played outside youtube.com. valid values: 'any','true' | default: 'any'
-              // fields: "<FIELDS>", // (optional) Selector specifying which fields to include in a partial response
-              //pageToken: "<PAGE_TOKEN>", // (optional)
-              //part: "<PART>", // (optional) default: 'id,snippet'
-              key: youTubeApiKey,
-            }).then(function (resp) {
-              //on success
-              console.log(resp.data);
-              $ionicLoading.hide();
-              angular.forEach(resp.data.items, function(item){
-                var vid = {
-                  title: item.snippet.title,
-                  thumbnail: item.snippet.thumbnails.high.url,
-                  date: item.snippet.publishedAt,
-                  id: item.id.videoId,
-                  height: item.snippet.thumbnails.high.height * $rootScope.deviceWidth/ item.snippet.thumbnails.high.width + 'px'
-                }
-                $scope.videos.push(vid);
-                console.log(vid);
-              })
-            }).catch(function (resp) {
-              //on error
-              console.log("error", resp);
-            });
-
-            $ionicModal.fromTemplateUrl('templates/video_modal.html', {
-              scope: $scope,
-              animation: 'slide-in-up'
-            }).then(function(modal) {
-              $scope.modal = modal;
-            });
-            
-            $scope.openVideo = function(id) {
-              $scope.showPlayer = true;
-              $scope.playerHeight =  window.innerHeight - 44 + "px";
-              //docs: https://developers.google.com/youtube/v3/docs/videos/list
-              youtubeFactory.getVideoById({
-                  videoId: id,
-                  // part: "<YOUR_PART>", // (optional) default: 'id,snippet,contentDetails,statistics'
-                  key: youTubeApiKey,
-              }).then(function (response) {
-                //on success
-                console.log(response);
-                $scope.modal.show(); 
-                $scope.video = response.data.items[0];
-              }).catch(function (response) {
-                  //on error
-              });
-            }
-
-            
-            $scope.closeModal = function(id) {
-              $scope.showPlayer = false;
-              $scope.modal.hide();
-            };
-            //Cleanup the modal when we're done with it!
-            $scope.$on('$destroy', function() {
-              $scope.modal.remove();
-            });
-            // Execute action on hide modal
-            $scope.$on('modal.hidden', function() {
-              // Execute action
-            });
-            // Execute action on remove modal
-            $scope.$on('modal.removed', function() {
-              // Execute action
-            });
-          }
-        }
+    url: "/videos",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/videos.html",
+        controller: "VideosCtrl"
       }
-    })
+    }
+  })
 
   .state('app.settings', {
     url: "/settings",

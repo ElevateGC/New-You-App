@@ -20,10 +20,10 @@ angular.module('services', [])
   category.recent = function() {
     var url = 'http://newyou.elevatehost.xyz/wp-json/wp/v2/posts/?fields=id,title,better_featured_image,categories';
     return DataLoader.get( url ).then(function(response) {
-      console.log('recent', response.data);
+      // console.log('recent', response.data);
       return response.data;
     }, function(response) {
-      console.log('error', response);
+      // console.log('error', response);
       return response;
     });
   }
@@ -92,7 +92,7 @@ angular.module('services', [])
   }
 
   category.filters = function(category_id) {
-    console.log(category_id);
+      // console.log(category_id);
         //health
         if (category_id == 1033){
           var filters =  
@@ -129,7 +129,7 @@ angular.module('services', [])
             filters: filters,
             color: "#1DAFEC"
           }
-          console.log('category', category);
+          // console.log('category', category);
           return category;
         }
           //wellness
@@ -172,7 +172,7 @@ angular.module('services', [])
             filters: filters,
             color: "#ACCD73"
           }
-          console.log('category', category);
+          // console.log('category', category);
 
           return category;
         }
@@ -228,7 +228,7 @@ angular.module('services', [])
             filters: filters,
             color: "#ED2B8B"
           }
-          console.log('category', category);
+          // console.log('category', category);
 
           return category;
         }
@@ -247,7 +247,7 @@ angular.module('services', [])
             filters: filters,
             color: "#F69831"
           }
-          console.log('category', category);
+          // console.log('category', category);
           return category;
         }
           //celebrity
@@ -278,7 +278,7 @@ angular.module('services', [])
             color: "#7B3B93"
 
           }
-          console.log('category', category);
+          // console.log('category', category);
           return category;
         }
           //entertainment
@@ -328,7 +328,7 @@ angular.module('services', [])
             filters: filters,
             color: "#F0373B"
           }
-          console.log('category', category);
+          // console.log('category', category);
 
           return category;
         }
@@ -341,7 +341,7 @@ angular.module('services', [])
             filters: null,
             color: "#000"
           }
-          console.log('category', category);
+          // console.log('category', category);
           return category;
 
         }
@@ -369,7 +369,7 @@ angular.module('services', [])
     },
     get: function(id) {
       bookmarkCache.get( id );
-      console.log( id );
+      // console.log( id );
     },
     check: function(id) {
       var keys = bookmarkCache.keys();

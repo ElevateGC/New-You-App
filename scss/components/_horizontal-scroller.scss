@@ -1,72 +1,84 @@
 .horizontal-scroll-component {
 
-	height: $scroll-component-height;
+  height: $scroll-component-height;
   width: $scroll-component-width;
 
-	@each $color-name, $color in $palettes {
-	  &.#{$color-name} {
-	    background-color: palette($color-name, base);
-	  }
-	}
+  @each $color-name, $color in $palettes {
+    &.#{$color-name} {
+      background-color: palette($color-name, base);
+    }
+  }
 
-	h1.horizontal-scroll-title {
-		@extend .remove-extras;
-		color: $scroll-heading-color;
-		text-align: left;
-		margin: 0;
-		font-size: $scroll-heading-size;
-		line-height: $scroll-heading-size;
-		padding-top: 8px;
-  	padding-bottom: 3px;
-  	padding-left: $slider-heading-padding-left;
-  	letter-spacing: 1px;
-	}
+  h1.horizontal-scroll-title {
+    @extend .remove-extras;
+    font-family: $scroll-heading-font;
+    color: $scroll-heading-color;
+    text-align: left;
+    margin: 0;
+    font-size: $scroll-heading-size;
+    line-height: $scroll-heading-size;
+    text-transform: uppercase;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: $slider-heading-padding-left;
+    letter-spacing: $scroll-heading-letter-spacing;
+  }
 
-	.horizontal-scroll {
-		overflow-x: auto;
-  	overflow-y: hidden ;
-  	white-space: nowrap;
-  	height: $scroll-height;
-  	padding-bottom: $scroll-item-margin * 2;
+  .horizontal-scroll {
+    overflow-x: auto;
+    overflow-y: hidden ;
+    white-space: nowrap;
+    height: $scroll-height;
+    padding-bottom: $scroll-item-margin * 2;
+    -webkit-scroll-snap-type: mandatory;
+      -ms-scroll-snap-type: mandatory;
+          scroll-snap-type: mandatory;
+    -webkit-scroll-snap-points-x: repeat(100%);
+      -ms-scroll-snap-points-x: repeat(100%);
+          scroll-snap-points-x: repeat(100%);
 
-  	.scroll-item {
-			display: inline-block;
-			position: relative;
-			height: $scroll-item-height;
-			margin: $scroll-item-margin;
-			// margin-bottom: 0;
-			margin-top: 0;
-			width: $scroll-item-width;
-			
-			&:first-child {
-				margin-left: $scroll-item-margin * 2;	
-			}
-			&:last-child {
-				margin-right: $scroll-item-margin * 2;	
-			} 
+    .scroll-item {
+      display: inline-block;
+      position: relative;
+      height: $scroll-item-height;
+      margin: $scroll-item-margin;
+      margin-top: 0;
+      width: $scroll-item-width;
+      
+      &:first-child {
+          margin-left: $scroll-item-margin * 2;   
+      }
+      &:last-child {
+          margin-right: $scroll-item-margin * 2;  
+      } 
 
-  		.scroll-item-image {
-			  height: $scroll-image-height;
-			  width: $scroll-image-width;
-			  background-position: center center;
-			  box-shadow: 0px 3px 3px rgba(0,0,0,0.22);
-			}
+      .scroll-item-image {
+        height: $scroll-image-height;
+        width: $scroll-image-width;
+        background-position: center center;
+        box-shadow: 0px 3px 3px rgba(0,0,0,0.22);
+      }
 
-			.scroll-item-title {
-				font-family: $scroll-title-font;
-				position: absolute;
-				bottom: 0;
-				width: $scroll-title-width;
-				color: $scroll-title-color;
-				font-size: $scroll-title-font-size;
-				background-color: $scroll-title-bg;
-				margin: 0;
-				padding: $scroll-title-padding;
-				word-wrap: break-word;
-  			overflow: hidden;
-    		white-space: normal;
-    		line-height: $scroll-title-line-height;
-			}
-  	}
-	}
+      .scroll-item-title {
+        font-family: $scroll-title-font;
+        position: absolute;
+        bottom: 0;
+        width: $scroll-title-width;
+        color: $scroll-title-color;
+        font-size: $scroll-title-font-size;
+        background-color: $scroll-title-bg;
+        margin: 0;
+        padding: $scroll-title-padding;
+        word-wrap: break-word;
+        overflow: hidden;
+        white-space: normal;
+        line-height: $scroll-title-line-height;
+        height: $scroll-title-min-height;
+        p {
+          height: 100%;
+          margin: 0;
+        }
+      }
+    }
+  }
 }
