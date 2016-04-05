@@ -53,3 +53,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 @import "pages/category-view";
 @import "pages/detail-view";
 @import "pages/videos";
+
+.item-input-inset .item-input-wrapper input {
+	line-height: 28px;
+}

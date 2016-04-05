@@ -207,12 +207,23 @@ angular.module('NewYou', [
     url: "/app",
     abstract: true,
     templateUrl: "templates/menu.html",
-    controller: function($rootScope, $scope) {
+    controller: function($rootScope, $scope, $ionicHistory, $state) {
       $scope.clickSearchIcon = function() {
         $rootScope.$emit('showFilterBar');
       }
       $rootScope.searchPage = false;
       $rootScope.mainCategories = wordpress_categories;
+      $scope.goToFeatured = function() {
+        $ionicHistory.nextViewOptions({
+            disableAnimate: true,
+            historyRoot: true
+        });
+        $state.go('app.categories');
+      }
+
+      $scope.openBrowser = function(link) {
+        window.open(link, "_blank");
+      }
     }
   })
 

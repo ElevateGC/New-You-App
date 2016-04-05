@@ -8,7 +8,8 @@
       <ion-nav-buttons side="left">
         <div class="nav-logo" 
           ng-background="img/logo.png" 
-          size="contain"></div>
+          size="contain"
+          ng-click="goToFeatured()"></div>
       </ion-nav-buttons>
 
       <ion-nav-buttons side="right">
@@ -56,10 +57,10 @@
         </ion-item>
       </ion-list>
       <div class="footer">
-        <span class="footer-links"><a href="http://www.newyou.com/about-us/" target="_blank">About Us</a></span>
-        <span class="footer-links"><a href="http://www.newyou.com/careers/" target="_blank">Careers</a></span>
-        <span class="footer-links"><a href="http://www.newyou.com/contact-us/" target="_blank">Contact</a></span>
-        <span class="footer-links"><a href="http://www.newyou.com/privacy-policy/" target="_blank">Privacy Policy</a></span>
+        <span class="footer-links" ng-click="openBrowser('http://www.newyou.com/about-us/')">About Us</span>
+        <span class="footer-links" ng-click="openBrowser('http://www.newyou.com/careers/')">Careers</span>
+        <span class="footer-links" ng-click="openBrowser('http://www.newyou.com/contact/')">Contact</span>
+        <span class="footer-links" ng-click="openBrowser('http://www.newyou.com/privacy-policy/')">Privacy Policy</span>
         </div>
     </ion-content>
   </ion-side-menu>
