@@ -1,0 +1,24 @@
+<ion-view>
+  <ion-floating-menu
+    menu-color="{{activeCategoryHeader.color}}"
+    menu-open-color="{{activeCategoryHeader.color}}"
+    menu-icon-color="#fff"
+    menu-open-icon-color="#fff"
+    ng-if="activeCategoryHeader">
+    <ion-floating-item icon="ion-social-twitter" button-color= "#00AAF3" icon-color="#fff" click="shareViaTwitter(post)"></ion-floating-item>
+    <ion-floating-item icon="ion-social-pinterest" button-color= "#CD1D20" icon-color="#fff" socialshare socialshare-url="{{post.link}}" socialshare-media="{{post.better_featured_image.source_url}}"></ion-floating-item>
+    <ion-floating-item icon="ion-social-instagram" button-color= "#3B719C" icon-color="#fff" click="shareViaInstagram(post)"></ion-floating-item>
+    <ion-floating-item button-color= "#37569B" icon="ion-social-facebook" icon-color="#fff" click="shareViaFacebook(post)"></ion-floating-item>
+  </ion-floating-menu>
+  <ion-content class="detail-view">
+  	<div class="post" ng-if="content">
+  		<div>
+  		  <img ng-src="{{post.better_featured_image.source_url}}" alt="" class="featured-image">
+        <h1 ng-bind-html="post.title.rendered" ng-class="activeCategory"></h1>
+        <p class="created-info">Posted {{post.date | amDateFormat:'MMMM Do YYYY h:mm A'}} | {{post.author.name}}</p>
+  		</div>
+  		<div class="body padding" ng-bind-html="content | html_filters"></div>
+    </div>
+    
+  </ion-content>
+</ion-view>

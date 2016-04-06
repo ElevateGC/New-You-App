@@ -1,0 +1,11 @@
+<ion-modal-view>
+  <ion-header-bar class="bar-dark">
+    <h1 class="title"></h1>
+    <button class="button icon ion-android-close" ng-click="closeModal()"></button>
+  </ion-header-bar>
+  <ion-content style="background-color: black;">
+  	<div ng-style="{'height': playerHeight}" ng-if="showPlayer">
+    	<youtube-video style="position: relative; top: 50%; transform: translateY(-50%);" video-id="video.id"></youtube-video>
+    </div>
+  </ion-content>
+</ion-modal-view>

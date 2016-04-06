@@ -1,0 +1,42 @@
+<ion-view>
+  <ion-content class="category-view" delegate-handle="category-scroll" ng-class="activeCategory.label">
+  <ion-refresher 
+    ng-if = "canLoad"
+    on-refresh="loadMore('refresh')" 
+    ng-class="activeCategory"
+    spinner="lines"
+    pulling-icon="ion-ios-arrow-down">
+</ion-refresher>
+  <div class="category-filter" ng-class="activeCategory.label">
+    <h1>{{activeCategory.label}}</h1>
+    <ul>
+      <li ng-if="filters != null" ng-repeat="filter in filters" ng-class="{ 'active': activefilter == filter.id}" ng-click="setActiveFilter(filter.id)">{{filter.label}}</li>
+    </ul>
+</div>
+	<ion-list>
+		<div 
+      class="item-with-image category-post" ng-repeat="post in posts | filter:{'categories': activefilter} | unique:'id' | filter: searchFilter"
+      ui-sref="app.post({id: post.id})"
+      track 
+      ng-style="{'height': postHeight}"
+      ng-background="{{post.better_featured_image.source_url}}">
+      <h1 ng-bind-html="post.title.rendered"></h1>
+		</div>
+	</ion-list>
+  <div ng-if="posts !== undefined && !posts.length" class="no-results padding animated fadeIn">
+    <h1 class="no-results padding">No Results</h1>
+  </div>
+  <div ng-if="posts !== undefined && hasNoPosts.indexOf(activefilter) > -1" class="padding animated fadeIn">
+  <h1 ng-show="filteredItems.length == 0" class="no-results padding">No posts found</h1>
+  </div>
+
+	<ion-infinite-scroll
+    ng-if="posts !== undefined && hasNoPosts.indexOf(activefilter) == -1 && canLoad"
+    on-infinite="loadMore('infinite')"
+    distance="1%"
+    immediate-check="false"
+    spinner="lines">
+  </ion-infinite-scroll>
+
+  </ion-content>
+</ion-view>

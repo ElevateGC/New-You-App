@@ -1,0 +1,41 @@
+<ion-view>
+  <ion-content class="home" overflow-scroll="true" delegate-handle="featured-scroll">
+  <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+  <ion-slide-box
+  ng-if="recentPosts"
+  on-slide-changed="slideHasChanged($index)"
+  auto-play="true" 
+  does-continue="true" 
+  show-pager="false"
+  ng-style="{'height': postHeight}">
+    <ion-slide 
+      ng-repeat="post in recentPosts"
+      class="slide"
+      ng-click="goToPost(post)"
+      ng-style="{'height': postHeight}"
+      ng-background="{{post.better_featured_image.source_url}}">
+      <div class="tag" ng-class="post.category.label">{{post.category.label}}</div>
+      <h1 ng-bind-html="post.title.rendered"></h1>
+    </ion-slide>
+  </ion-slide-box>
+  <div class="horizontal-scroll-component" ng-repeat="category in categories | orderBy: 'id'" ng-class="category.label">
+    <h1 class="horizontal-scroll-title" ng-bind-html="category.label"></h1>
+    <div class="horizontal-scroll" on-drag="onDrag($event)">
+      <a class="scroll-item" ng-repeat="post in category.posts track by $index" ng-click="goToPost(post)" track>
+        <div class="scroll-item-title">
+          <p ng-bind-html="post.title.rendered"  data-ellipsis></p>
+        </div>
+        <div class="scroll-item-image" ng-background="{{post.better_featured_image.source_url}}" size="cover" ></div>
+      </a>
+    </div>
+<!--     <ion-scroll class="horizontal-scroll" direction="x" zooming="false" delegate-handle="horizontal" on-drag="onDrag($event)" paging="true">
+    <a class="scroll-item" ng-repeat="post in category.posts track by $index" ng-click="goToPost(post)" track>
+        <div class="scroll-item-title">
+          <p ng-bind-html="post.title.rendered"  data-ellipsis></p>
+        </div>
+        <div class="scroll-item-image" ng-background="{{post.better_featured_image.source_url}}" size="cover" ></div>
+      </a>
+      </ion-scroll> -->
+  </div>
+  </ion-content>
+</ion-view>

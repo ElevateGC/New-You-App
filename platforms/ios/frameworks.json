@@ -1,0 +1,9 @@
+{
+    "Security.framework": 2,
+    "Storekit.framework": 2,
+    "CoreLocation.framework": 2,
+    "libstdc++.dylib": 2,
+    "libz.dylib": 2,
+    "Social.framework": 1,
+    "MessageUI.framework": 1
+}
