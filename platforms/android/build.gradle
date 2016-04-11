@@ -33,7 +33,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:1.5.0'
     }
-}
+   }
 
 // Allow plugins to declare Maven dependencies via build-extras.gradle.
 repositories {
@@ -86,8 +86,7 @@ ext {
 }
 
 // PLUGIN GRADLE EXTENSIONS START
-apply from: "com.pushwoosh.plugins.pushwoosh/v1-push.gradle"
-apply from: "cordova-plugin-crosswalk-webview/v1-xwalk.gradle"
+apply from: "cordova-plugin-crosswalk-webview/v2-xwalk.gradle"
 // PLUGIN GRADLE EXTENSIONS END
 
 def hasBuildExtras = file('build-extras.gradle').exists()
@@ -173,7 +172,7 @@ android {
     }
 
     lintOptions {
-        abortOnError false;
+      abortOnError false;
     }
 
     compileSdkVersion cdvCompileSdkVersion
@@ -200,15 +199,15 @@ android {
             }
         }
     } else if (!cdvVersionCode) {
-        def minSdkVersion = cdvMinSdkVersion ?: privateHelpers.extractIntFromManifest("minSdkVersion")
-        // Vary versionCode by the two most common API levels:
-        // 14 is ICS, which is the lowest API level for many apps.
-        // 20 is Lollipop, which is the lowest API level for the updatable system webview.
-        if (minSdkVersion >= 20) {
-            defaultConfig.versionCode += 9
-        } else if (minSdkVersion >= 14) {
-            defaultConfig.versionCode += 8
-        }
+      def minSdkVersion = cdvMinSdkVersion ?: privateHelpers.extractIntFromManifest("minSdkVersion")
+      // Vary versionCode by the two most common API levels:
+      // 14 is ICS, which is the lowest API level for many apps.
+      // 20 is Lollipop, which is the lowest API level for the updatable system webview.
+      if (minSdkVersion >= 20) {
+        defaultConfig.versionCode += 9
+      } else if (minSdkVersion >= 14) {
+        defaultConfig.versionCode += 8
+      }
     }
 
     compileOptions {
@@ -221,8 +220,7 @@ android {
             release {
                 // These must be set or Gradle will complain (even if they are overridden).
                 keyAlias = ""
-                keyPassword = "__unset"
-                // And these must be set to non-empty in order to have the signing step added to the task graph.
+                keyPassword = "__unset" // And these must be set to non-empty in order to have the signing step added to the task graph.
                 storeFile = null
                 storePassword = "__unset"
             }
@@ -245,9 +243,6 @@ dependencies {
     debugCompile project(path: "CordovaLib", configuration: "debug")
     releaseCompile project(path: "CordovaLib", configuration: "release")
     // SUB-PROJECT DEPENDENCIES END
-    compile 'com.android.support:support-v4:24.0.0-alpha1'
-    compile 'com.google.android.gms:play-services-gcm:8.4.0'
-    compile 'com.google.android.gms:play-services-location:+'
 }
 
 def promptForReleaseKeyPassword() {

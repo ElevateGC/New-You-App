@@ -9,6 +9,10 @@
                 "parents": {
                     "/*": [
                         {
+                            "xml": "<feature name=\"PushNotification\"><param name=\"ios-package\" value=\"PushPlugin\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>",
                             "count": 1
                         },
@@ -17,19 +21,7 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"StatusBar\"><param name=\"ios-package\" value=\"CDVStatusBar\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<preference name=\"StatusBarOverlaysWebView\" value=\"true\" />",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<preference name=\"StatusBarStyle\" value=\"lightcontent\" />",
+                            "xml": "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>",
                             "count": 1
                         },
                         {
@@ -37,37 +29,7 @@
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"PushPlugin\"><param name=\"ios-package\" value=\"PushPlugin\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"PushNotification\"><param name=\"ios-package\" value=\"PushNotification\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"SocialSharing\"><param name=\"ios-package\" value=\"SocialSharing\" /><param name=\"onload\" value=\"true\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"InAppBrowser\"><param name=\"ios-package\" value=\"CDVInAppBrowser\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Clipboard\"><param name=\"ios-package\" value=\"CDVClipboard\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Instagram\"><param name=\"ios-package\" value=\"CDVInstagramPlugin\" /></feature>",
-                            "count": 1
-                        }
-                    ]
-                }
-            },
-            "undefined": {
-                "parents": {
-                    "undefined": [
-                        {
-                            "xml": "<access origin=\"*.pushwoosh.com\" />",
+                            "xml": "<feature name=\"SplashScreen\"><param name=\"ios-package\" value=\"CDVSplashScreen\" /><param name=\"onload\" value=\"true\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -75,9 +37,21 @@
             },
             "*-Info.plist": {
                 "parents": {
-                    "LSApplicationQueriesSchemes": [
+                    "UIBackgroundModes": [
                         {
-                            "xml": "<array><string>instagram</string></array>",
+                            "xml": "<array><string>remote-notification</string></array>",
+                            "count": 1
+                        }
+                    ],
+                    "GCM_SENDER_ID": [
+                        {
+                            "xml": "<string>GCM_PROJECT_NUMBER</string>",
+                            "count": 1
+                        }
+                    ],
+                    "IS_GCM_ENABLED": [
+                        {
+                            "xml": "<true />",
                             "count": 1
                         }
                     ]
@@ -86,48 +60,42 @@
         }
     },
     "installed_plugins": {
-        "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.ionicframework.wpionic861624"
-        },
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.ionicframework.wpionic861624"
-        },
-        "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "com.ionicframework.wpionic861624"
-        },
-        "cordova-plugin-crosswalk-webview": {
-            "PACKAGE_NAME": "com.ionicframework.wpionic861624"
-        },
-        "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "com.ionicframework.wpionic861624"
+        "phonegap-plugin-push": {
+            "SENDER_ID": "GCM_PROJECT_NUMBER",
+            "PACKAGE_NAME": "com.newyou.v2"
         },
         "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.ionicframework.wpionic861624"
+            "PACKAGE_NAME": "com.newyou.v2"
         },
-        "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "com.ionicframework.wpionic861624"
+        "cordova-plugin-crosswalk-webview": {
+            "PACKAGE_NAME": "com.newyou.v2"
         },
-        "com.phonegap.plugins.PushPlugin": {
-            "PACKAGE_NAME": "com.newyou.v1"
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.newyou.v2"
         },
-        "com.pushwoosh.plugins.pushwoosh": {
-            "PACKAGE_NAME": "com.newyou.v1"
-        },
-        "cordova-plugin-x-socialsharing": {
-            "PACKAGE_NAME": "com.newyou.v1"
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.newyou.v2"
         },
         "cordova-plugin-inappbrowser": {
-            "PACKAGE_NAME": "com.newyou.v1"
+            "PACKAGE_NAME": "com.newyou.v2"
         },
-        "com.verso.cordova.clipboard": {
-            "PACKAGE_NAME": "com.newyou.v1"
+        "ionic-plugin-keyboard": {
+            "PACKAGE_NAME": "com.newyou.v2"
         },
-        "cordova-instagram-plugin": {
-            "PACKAGE_NAME": "com.newyou.v1"
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.newyou.v2"
         }
     },
     "dependent_plugins": {},
     "modules": [
+        {
+            "file": "plugins/phonegap-plugin-push/www/push.js",
+            "id": "phonegap-plugin-push.PushNotification",
+            "pluginId": "phonegap-plugin-push",
+            "clobbers": [
+                "PushNotification"
+            ]
+        },
         {
             "file": "plugins/cordova-plugin-console/www/console-via-logger.js",
             "id": "cordova-plugin-console.console",
@@ -153,19 +121,12 @@
             ]
         },
         {
-            "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
-            "id": "cordova-plugin-splashscreen.SplashScreen",
-            "pluginId": "cordova-plugin-splashscreen",
+            "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
+            "id": "cordova-plugin-inappbrowser.inappbrowser",
+            "pluginId": "cordova-plugin-inappbrowser",
             "clobbers": [
-                "navigator.splashscreen"
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
-            "id": "cordova-plugin-statusbar.statusbar",
-            "pluginId": "cordova-plugin-statusbar",
-            "clobbers": [
-                "window.StatusBar"
+                "cordova.InAppBrowser.open",
+                "window.open"
             ]
         },
         {
@@ -178,68 +139,12 @@
             "runs": true
         },
         {
-            "file": "plugins/com.phonegap.plugins.PushPlugin/www/PushNotification.js",
-            "id": "com.phonegap.plugins.PushPlugin.PushNotification",
-            "pluginId": "com.phonegap.plugins.PushPlugin",
+            "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+            "id": "cordova-plugin-splashscreen.SplashScreen",
+            "pluginId": "cordova-plugin-splashscreen",
             "clobbers": [
-                "PushNotification"
-            ]
-        },
-        {
-            "file": "plugins/com.pushwoosh.plugins.pushwoosh/www/PushNotification.js",
-            "id": "com.pushwoosh.plugins.pushwoosh.PushNotification",
-            "pluginId": "com.pushwoosh.plugins.pushwoosh",
-            "clobbers": [
-                "plugins.pushNotification"
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-x-socialsharing/www/SocialSharing.js",
-            "id": "cordova-plugin-x-socialsharing.SocialSharing",
-            "pluginId": "cordova-plugin-x-socialsharing",
-            "clobbers": [
-                "window.plugins.socialsharing"
-            ]
-        },
-        {
-            "file": "plugins/cordova-plugin-inappbrowser/www/inappbrowser.js",
-            "id": "cordova-plugin-inappbrowser.inappbrowser",
-            "pluginId": "cordova-plugin-inappbrowser",
-            "clobbers": [
-                "cordova.InAppBrowser.open",
-                "window.open"
-            ]
-        },
-        {
-            "file": "plugins/com.verso.cordova.clipboard/www/clipboard.js",
-            "id": "com.verso.cordova.clipboard.Clipboard",
-            "pluginId": "com.verso.cordova.clipboard",
-            "clobbers": [
-                "cordova.plugins.clipboard"
-            ]
-        },
-        {
-            "file": "plugins/cordova-instagram-plugin/www/CDVInstagramPlugin.js",
-            "id": "cordova-instagram-plugin.InstagramPlugin",
-            "pluginId": "cordova-instagram-plugin",
-            "clobbers": [
-                "Instagram"
+                "navigator.splashscreen"
             ]
         }
-    ],
-    "plugin_metadata": {
-        "cordova-plugin-console": "1.0.2",
-        "cordova-plugin-device": "1.1.0",
-        "cordova-plugin-splashscreen": "3.0.0",
-        "cordova-plugin-crosswalk-webview": "1.2.0",
-        "cordova-plugin-statusbar": "2.0.0",
-        "cordova-plugin-whitelist": "1.2.0",
-        "ionic-plugin-keyboard": "1.0.8",
-        "com.phonegap.plugins.PushPlugin": "2.5.0",
-        "com.pushwoosh.plugins.pushwoosh": "4.2.0",
-        "cordova-plugin-x-socialsharing": "5.0.10",
-        "cordova-plugin-inappbrowser": "1.2.1",
-        "com.verso.cordova.clipboard": "0.1.0",
-        "cordova-instagram-plugin": "0.5.3"
-    }
+    ]
 }

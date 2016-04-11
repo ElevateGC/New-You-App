@@ -7,7 +7,8 @@ angular.module("controllers")
 	$ionicLoading,
 	$timeout,
 	$ionicScrollDelegate,
-	$state) {
+	$state,
+  $ionicSlideBoxDelegate) {
 
 
   function fixScroll(handleName) {
@@ -73,6 +74,7 @@ angular.module("controllers")
       			$scope.recentPosts.push(post);
       	 	}
       	})
+        $ionicSlideBoxDelegate.update();
 
       })
     })	

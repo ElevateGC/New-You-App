@@ -1,27 +1,3 @@
-function initPushwoosh() {
-  var pushNotification = cordova.require("com.pushwoosh.plugins.pushwoosh.PushNotification");
-  if (device.platform == "Android") {
-    registerPushwooshAndroid();
-  }
-
-  if (device.platform == "iPhone" || device.platform == "iOS") {
-    registerPushwooshIOS();
-  }
-
-  if (device.platform == "Win32NT") {
-    registerPushwooshWP();
-  }
-
-  pushNotification.getLaunchNotification(
-    function(notification) {
-      if (notification != null) {
-        alert(JSON.stringify(notification));
-      } else {
-        console.log("No launch notification");
-      }
-    }
-  );
-}
 function convertImgToDataURLviaCanvas(url, callback, outputFormat){
     var img = new Image();
     img.crossOrigin = 'Anonymous';
@@ -70,8 +46,8 @@ var wordpress_categories =
   ];
 
 angular.module('NewYou', [
-  'ionic',
-  'ionic.service.core',
+  'ionic','ionic.service.core',
+  
   'controllers',
   'services',
   'filters',
@@ -99,48 +75,14 @@ angular.module('NewYou', [
 
   $rootScope.deviceWidth = window.innerWidth;
   $rootScope.deviceHeight = window.innerHeight;
-
-  var androidConfig, iosConfig, register;
- 
-    androidConfig = {
-        "senderID": ""
-    };
-    iosConfig = {
-        "badge": true,
-        "sound": true,
-        "alert": true
-    };
- 
-    register = function(os, token) {
-        var baseUrl;
-        baseUrl = 'http://newyou.elevatehost.xyz/pnfw';
-        if (!baseUrl) {
-            return $q.reject();
-        }
-        return $http({
-            method: 'POST',
-            url: baseUrl + '/register',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            transformRequest: function(obj) {
-                var p, str;
-                str = [];
-                for (p in obj) {
-                    str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]));
-                }
-                return str.join('&');
-            },
-            data: {
-                os: os,
-                token: token
-            }
-        });
-    };
     return $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
-      $ionicConfig.scrolling.jsScrolling(false)
+      // var push = new Ionic.Push();
+
+      // push.register(function(token) {
+      //   push.saveToken(token, { 'ignore_user': true });
+      // });
       if ($window.cordova && $window.cordova.plugins.Keyboard) {
         $window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         $window.cordova.plugins.Keyboard.disableScroll(true);
@@ -160,8 +102,6 @@ angular.module('NewYou', [
       }
 
       amMoment.changeLocale('en-gb');
-      
-      initPushwoosh();
 
     }, false);
 })

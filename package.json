@@ -23,12 +23,16 @@
     "cordova-plugin-splashscreen",
     "cordova-plugin-statusbar",
     "ionic-plugin-keyboard",
+    "cordova-plugin-inappbrowser",
     {
-      "locator": "https://github.com/phonegap-build/PushPlugin.git",
-      "id": "com.phonegap.plugins.PushPlugin"
-    },
-    "pushwoosh-cordova-plugin",
-    "cordova-plugin-inappbrowser"
+      "variables": {
+        "SENDER_ID": "XXXXXXX"
+      },
+      "locator": "phonegap-plugin-push"
+    }
   ],
-  "cordovaPlatforms": []
+  "cordovaPlatforms": [
+    "ios",
+    "android"
+  ]
 }
